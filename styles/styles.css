@@ -1,0 +1,814 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+* ::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+  font-family: "ethnocentric";
+  src: url(../media/fonts/ethnocentric\ rg.otf);
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #212121;
+  height: 93vh;
+  width: 100vw;
+}
+
+main {
+  width: 100%;
+  margin: 60px 0px 0px 0px;
+  padding-bottom: 60px;
+}
+
+a,
+label,
+p {
+  color: #c9c9c9;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+a:hover {
+  text-decoration: underline;
+  background-color: #67d2da;
+  color: #1c1211;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5px 13px 7px 13px;
+  transform: scale(1.09);
+  transition: all ease 0.5s;
+}
+
+h1 {
+  color: #c9c9c9;
+  background-color: #333;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+li {
+  list-style: none;
+}
+
+@keyframes fadeLeft {
+  from {
+    margin-left: 100%;
+  }
+  to {
+    margin-left: 0%;
+  }
+}
+@keyframes fadeRight {
+  from {
+    margin-right: 100%;
+  }
+  to {
+    margin-right: 0%;
+  }
+}
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    scale: 25%;
+  }
+  to {
+    opacity: 1;
+    scale: 100%;
+  }
+}
+@keyframes zoomOut {
+  from {
+    opacity: 0;
+    scale: 115%;
+    overflow-x: hidden;
+  }
+  to {
+    opacity: 1;
+    scale: 100%;
+  }
+}
+header .navBar {
+  background-color: #1c1211;
+}
+header .navBar div .tituloG {
+  color: #bad9e4;
+  font-size: 16px;
+  text-shadow: rgb(255, 208, 0) 1px 0 5px;
+  font-family: "ethnocentric", sans-serif;
+  transition: all 300ms;
+}
+header .navBar div .tituloG:hover {
+  padding: 5px 13px;
+  color: #1c1211;
+}
+header .navBar div div ul li .liNav {
+  color: #c9c9c9;
+}
+header .navBar div div ul li .liNav:hover {
+  color: #1c1211;
+}
+header .navBar div div ul li .aRight {
+  position: absolute;
+  right: 5px;
+  text-wrap: nowrap;
+}
+header .navBar div div ul li .aRight:hover {
+  padding: 5px 13px;
+  color: #1c1211;
+  text-wrap: nowrap;
+}
+header .navBar div div ul li .current {
+  background-color: #3dd1ff;
+  color: #1c1211;
+  border-radius: 5px;
+  text-decoration: underline;
+  padding: 5px 13px 7px 13px;
+}
+
+.home .container-xxl .row .col-lg-4 .row .col-12 .marcas {
+  color: #c9c9c9;
+  background-color: #333;
+  font-size: 20px;
+}
+.home .container-xxl .row .col-lg-4 .row .col-12 .carousel {
+  background-color: rgba(33, 33, 33, 0.6235294118);
+  height: 400px;
+}
+.home .container-xxl .row .col-lg-4 .row .col-12 .carousel .carousel-inner .carousel-item .imgCarrusel {
+  width: 350px;
+}
+.home .container-xxl .row .col-lg-4 .row .col-12 form button a {
+  color: white;
+  padding: 6px 56px;
+}
+.home .container-xxl .row .col-lg-4 .row .col-12 form button a:hover {
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 0;
+  transform: scale(1);
+}
+.home .container-xxl .row .logo {
+  margin: auto;
+  padding: 20px 0px;
+}
+.home .container-xxl .row .logo .logoImg {
+  display: block;
+  margin-top: -15%;
+  width: 100%;
+}
+.home .container-xxl .row .logo .logoAuto {
+  display: flex;
+  width: 50%;
+  margin-top: -20%;
+  margin-left: 25%;
+}
+
+main {
+  margin: 60px 0px 0px 0px;
+}
+main .container-xxl .flexRow {
+  display: flex;
+}
+main .container-xxl .flexRow .infoImg {
+  width: 45vw;
+  max-width: 650px;
+  height: 450px;
+  view-timeline-name: --image;
+  view-timeline-axis: block;
+  animation-timeline: --image;
+  animation-name: zoomIn;
+  animation-range: entry 25% cover 50%;
+}
+main .container-xxl .flexRow .infoImgLast {
+  margin-bottom: 50px;
+}
+main .container-xxl .flexRow .infoDescripcion {
+  font-size: 20px;
+  color: #c9c9c9;
+  margin: auto;
+  text-align: center;
+}
+main .container-xxl .flexReverse {
+  display: flex;
+  flex-direction: row-reverse;
+}
+main .container-xxl .flexReverse .infoImg {
+  width: 45vw;
+  max-width: 650px;
+  height: 450px;
+  view-timeline-name: --image;
+  view-timeline-axis: block;
+  animation-timeline: --image;
+  animation-name: zoomIn;
+  animation-range: entry 25% cover 50%;
+}
+main .container-xxl .flexReverse .infoDescripcion {
+  font-size: 20px;
+  color: #c9c9c9;
+  margin: auto;
+  text-align: center;
+}
+
+main {
+  margin: 60px 0px 0px 0px;
+}
+main .flexRow {
+  display: flex;
+}
+main .flexRow .infoImg {
+  width: 45vw;
+  max-width: 650px;
+  height: 450px;
+  view-timeline-name: --image;
+  view-timeline-axis: block;
+  animation-timeline: --image;
+  animation-name: zoomIn;
+  animation-range: entry 25% cover 50%;
+}
+main .flexRow .infoDescripcion {
+  font-size: 20px;
+  color: #c9c9c9;
+}
+main .flexReverse {
+  display: flex;
+  flex-direction: row-reverse;
+}
+main .flexReverse .infoImg {
+  width: 45vw;
+  max-width: 624px;
+  height: 416px;
+  view-timeline-name: --image;
+  view-timeline-axis: block;
+  animation-timeline: --image;
+  animation-name: zoomIn;
+  animation-range: entry 25% cover 50%;
+}
+main .flexReverse .infoImgLast {
+  margin-bottom: 50px;
+}
+main .flexReverse .infoDescripcion {
+  font-size: 20px;
+  color: #c9c9c9;
+}
+
+.box {
+  margin: 40px 0px 0px 0px;
+  padding: 0;
+}
+.box div .tPrincipal {
+  background-color: rgba(0, 0, 0, 0.616);
+  color: #c9c9c9;
+  font-weight: bold;
+  border-radius: 10px;
+  z-index: 1;
+  position: fixed;
+  top: 60px;
+  margin-left: 34%;
+  margin-right: 34%;
+}
+.box .empresa {
+  width: 100vw;
+  height: 90vh;
+  margin: 0;
+}
+.box .empresa .carousel .botones {
+  margin-left: -1500px;
+}
+.box .empresa .carousel .carousel-inner .carousel-item {
+  width: 100%;
+  height: 100%;
+}
+.box .empresa .carousel .carousel-inner .carousel-item .imgEmpresa {
+  display: block;
+  height: 90vh;
+  margin: auto;
+  margin-top: 10px;
+}
+.box .empresa .carousel .carousel-inner .carousel-item .carouselCaption {
+  display: flex;
+  flex-direction: column;
+}
+.box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .titulo {
+  color: #c9c9c9;
+  position: fixed;
+  left: 50px;
+  top: 240px;
+  animation-delay: 0.5s;
+}
+.box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .historiaUno, .box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .historiaTres, .box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .historiaDos {
+  display: block;
+  color: #c9c9c9;
+  margin-top: -350px;
+  margin-left: 80%;
+  width: 29vw;
+  animation-delay: 1s;
+}
+.box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .historiaDos {
+  width: 23vw;
+  margin-top: -350px;
+  margin-left: 86%;
+}
+.box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .historiaTres {
+  width: 21vw;
+  margin-top: -375px;
+  margin-left: 90%;
+}
+.box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .saberMas {
+  animation-delay: 1.5s;
+  position: fixed;
+  bottom: 55px;
+  right: 5vw;
+}
+.box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .saberMas .aEmpresa {
+  background-color: #3dd1ff;
+  color: #1c1211;
+  border-radius: 5px;
+  padding: 10px 30px;
+  display: inline-block;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-wrap: nowrap;
+}
+
+main div .row div form div button a {
+  color: white;
+  padding: 6px 56px;
+}
+main div .row div form div button a:hover {
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 0;
+  transform: scale(1);
+}
+
+.error {
+  padding: 0;
+  margin: 0;
+}
+.error .notFound {
+  width: 100vw;
+  height: 40px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+}
+.error .notFound img {
+  width: 50%;
+  margin-top: 90px;
+}
+.error .notFound h1 {
+  position: fixed;
+  top: 80px;
+  width: 100vw;
+  background-color: #67d2da;
+  color: #1c1211;
+}
+.error .notFound div button {
+  position: fixed;
+  bottom: 55px;
+  right: 5vw;
+  border-radius: 5px;
+}
+.error .notFound div button a {
+  background-color: #3dd1ff;
+  color: #1c1211;
+  border-radius: 5px;
+  padding: 10px 30px;
+  display: inline-block;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-wrap: nowrap;
+}
+
+.content {
+  margin-top: 55px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  background-color: #333;
+}
+.content .filtros {
+  position: sticky;
+  top: 100px;
+  height: 82vh;
+  padding: 2rem;
+  padding-right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.content .filtros nav .menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.content .filtros nav .menu .btnShop {
+  background-color: transparent;
+  border: 0;
+  padding: 1rem;
+  color: #c9c9c9;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  width: 100%;
+}
+.content .filtros nav .menu .current {
+  background-color: #c9c9c9;
+  color: #333;
+  border-top-left-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+}
+.content .filtros nav .menu .botonCarrito {
+  margin-top: 2rem;
+}
+.content .filtros nav .menu .botonCarrito .contCarrito {
+  background-color: #c9c9c9;
+  color: #333;
+  padding: 0.15rem 0.25rem;
+  border-radius: 0.25rem;
+}
+.content .filtros footer ul li {
+  color: #c9c9c9;
+  background-color: #333;
+}
+.content .filtros footer ul li :hover {
+  color: #333;
+  background-color: #c9c9c9;
+}
+.content .filtros footer h3 {
+  font-size: 0.85rem;
+  color: rgba(122, 110, 110, 0.4588235294);
+}
+.content .contenido {
+  background-color: #c9c9c9;
+  margin: 1rem;
+  margin-left: 0;
+  border-radius: 2rem;
+  padding: 3rem;
+}
+.content .contenido .tituloPrincipal {
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+.content .contenido .contenedorCarrito {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.content .contenido .contenedorCarrito .empty,
+.content .contenido .contenedorCarrito .comprado {
+  color: #333;
+}
+.content .contenido .contenedorCarrito .carritoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.content .contenido .contenedorCarrito .carritoItem .itemProducto {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c0c0c0;
+  color: #333;
+  padding: 0.5rem;
+  padding-right: 1.5rem;
+  border-radius: 1rem;
+}
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .carritoProductoCantidad,
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .carritoProductoPrecio,
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .carritoProductoSubtotal {
+  width: 0rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .carritoProductoTitulo {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  margin-inline: -15%;
+  max-height: 7rem;
+}
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .carritoProductoTitulo h3 {
+  max-width: max-content;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 3rem;
+}
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .eliminarArticulo {
+  border: 0;
+  background-color: transparent;
+  color: red;
+  cursor: pointer;
+}
+.content .contenido .contenedorCarrito .carritoItem .itemProducto h4 {
+  font-size: 0.75rem;
+}
+.content .contenido .contenedorCarrito .carritoItem .itemProducto img {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+.content .contenido .contenedorCarrito .carritoAcciones {
+  display: flex;
+  justify-content: space-between;
+}
+.content .contenido .contenedorCarrito .carritoAcciones .acciones1 .carritoAccionesVaciar {
+  border: 0;
+  background-color: #c0c0c0;
+  padding: 1rem;
+  border-radius: 1rem;
+  color: #333;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.content .contenido .contenedorCarrito .carritoAcciones .acciones2 {
+  display: flex;
+}
+.content .contenido .contenedorCarrito .carritoAcciones .acciones2 .carritoAccionesTotal {
+  display: flex;
+  background-color: #c0c0c0;
+  padding: 1rem;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  text-transform: uppercase;
+  gap: 1rem;
+}
+.content .contenido .contenedorCarrito .carritoAcciones .acciones2 .carritoAccionesTotal p {
+  color: #333;
+  margin: 0;
+}
+.content .contenido .contenedorCarrito .carritoAcciones .acciones2 .carritoAccionesComprar {
+  border: 0;
+  background-color: #333;
+  padding: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  color: #c0c0c0;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.content .contenido .contenedorCarrito .disabled {
+  display: none;
+}
+.content .contenido .contenedor {
+  display: grid;
+  grid-template-columns: repeat(4, 24%);
+  gap: 1rem;
+}
+.content .contenido .contenedor p {
+  color: #212121;
+}
+.content .contenido .contenedor .item .itemDetalles {
+  background-color: #333;
+  color: #c9c9c9;
+  padding: 0.3rem;
+  border-radius: 1rem;
+  margin: 0;
+  margin-top: -2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.content .contenido .contenedor .item .itemDetalles .itemPrecio {
+  color: #c9c9c9;
+}
+.content .contenido .contenedor .item .itemDetalles .itemTitulo {
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 3rem;
+}
+.content .contenido .contenedor .item .itemDetalles .eliminarProducto,
+.content .contenido .contenedor .item .itemDetalles .agregarProducto {
+  border: 0;
+  background-color: #c9c9c9;
+  color: #333;
+  text-transform: uppercase;
+  border-radius: 2rem;
+  cursor: pointer;
+  border: solid 1px #c9c9c9;
+  transition: background-color 0.2s, color 0.2s;
+}
+.content .contenido .contenedor .item .itemDetalles .eliminarProducto:hover,
+.content .contenido .contenedor .item .itemDetalles .agregarProducto:hover {
+  background-color: #333;
+  color: #c9c9c9;
+}
+.content .contenido .contenedor .item img {
+  width: 100%;
+  height: 15rem;
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+
+.listado {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 2rem;
+}
+.listado .formAdd {
+  position: sticky;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+.listado .formAdd .tituloPrincipalListado {
+  color: #c9c9c9;
+}
+.listado .formAdd #formularioAgregarProducto > div {
+  display: grid;
+  grid-template-areas: "label input";
+  justify-content: space-between;
+}
+.listado .formAdd #formularioAgregarProducto > div > label {
+  grid-area: label;
+  width: 100%;
+}
+.listado .formAdd #formularioAgregarProducto > div > input {
+  grid-area: input;
+  width: 15vw;
+}
+.listado .delete {
+  margin-top: 2rem;
+}
+
+.disabled {
+  display: none;
+}
+
+.estiloFooter {
+  background-color: #1c1211;
+  display: grid;
+  justify-content: center;
+  width: 100vw;
+  height: 50px;
+}
+.estiloFooter .contenedorFooter .listaFooter {
+  display: flex;
+  padding-left: 0;
+  gap: 2rem;
+}
+.estiloFooter .contenedorFooter .listaFooter .top {
+  position: absolute;
+  right: 50px;
+}
+.estiloFooter .contenedorFooter .listaFooter .top:hover {
+  text-decoration: underline;
+  background-color: rgba(122, 110, 110, 0.4588235294);
+  cursor: pointer;
+  border-radius: 5px;
+  transform: scale(1.09);
+  transition: all ease 0.5s;
+}
+
+@media only screen and (max-width: 770px) {
+  a,
+  label,
+  p {
+    font-size: 14px;
+  }
+  a:hover {
+    padding: 5px 9px;
+  }
+  h1 {
+    font-size: 18px;
+  }
+  main {
+    margin: 60px 0px 80px 0px;
+  }
+  main .container-xxl .flexRow {
+    display: block;
+  }
+  main .container-xxl .flexRow .infoImg {
+    width: 90vw;
+    max-width: 700px;
+    height: auto;
+    animation-name: zoomIn;
+    width: 100%;
+  }
+  main .container-xxl .flexRow .infoImgLast {
+    margin-bottom: 0px;
+  }
+  main .container-xxl .flexRow .lastDescripcion {
+    padding-bottom: 30px;
+  }
+  main .container-xxl .flexRow .infoDescripcion {
+    font-size: 15px;
+  }
+  main .container-xxl .flexReverse {
+    display: block;
+  }
+  main .container-xxl .flexReverse .infoImg {
+    width: 90vw;
+    max-width: 700px;
+    height: auto;
+    width: 100%;
+  }
+  main .container-xxl .flexReverse .infoImgLast {
+    margin-bottom: 0px;
+  }
+  main .container-xxl .flexReverse .lastDescripcion {
+    padding-bottom: 30px;
+  }
+  main .container-xxl .flexReverse .infoDescripcion {
+    font-size: 15px;
+  }
+  main .container-xxl .row .col-lg-6 form .col-12 button a {
+    padding: 6px 30px;
+  }
+  main .container-xxl .row .col-lg-6 form .col-12 button a:hover {
+    padding: 0;
+  }
+  header .navBar div .tituloG:hover {
+    padding: 5px 2px;
+    transform: scale(1);
+  }
+  header .navBar div div ul li .aRight {
+    position: static;
+  }
+  .home {
+    padding-top: 60px;
+  }
+  .home .container-xxl .row .col-lg-4 .row .col-12 form .boton {
+    margin-bottom: 30px;
+  }
+  .home .container-xxl .row .col-lg-4 .row .col-12 form .boton button a {
+    padding: 6px 41px;
+  }
+  .home .container-xxl .row .col-lg-4 .row .col-12 form .boton button a:hover {
+    padding: 0;
+  }
+  .box div .tPrincipal {
+    margin: 0;
+    border-radius: 5px;
+  }
+  .box .empresa .carousel .carousel-inner .carousel-item .imgEmpresa {
+    width: 150vw;
+    height: 90vh;
+    margin-left: -90px;
+  }
+  .box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .titulo {
+    background-color: rgba(0, 0, 0, 0.616);
+    top: 350px;
+  }
+  .box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .historiaUno, .box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .historiaDos, .box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .historiaTres {
+    background-color: rgba(0, 0, 0, 0.616);
+    margin-top: -250px;
+    margin-left: 15%;
+    height: 30%;
+    width: 65vw;
+  }
+  .box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .historiaDos {
+    background-color: rgba(0, 0, 0, 0.616);
+    margin-top: -310px;
+    margin-left: 17%;
+    height: 32%;
+    width: 65vw;
+  }
+  .box .empresa .carousel .carousel-inner .carousel-item .carouselCaption .historiaTres {
+    background-color: rgba(0, 0, 0, 0.616);
+    margin-top: -315px;
+    margin-left: 15%;
+    height: 35%;
+    width: 65vw;
+  }
+  .error .notFound img {
+    width: 90%;
+    margin-top: 190px;
+  }
+  .estiloFooter {
+    height: 45px;
+  }
+  .estiloFooter .contenedorFooter .listaFooter {
+    gap: 35px;
+  }
+  .estiloFooter .contenedorFooter .listaFooter .top {
+    position: static;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

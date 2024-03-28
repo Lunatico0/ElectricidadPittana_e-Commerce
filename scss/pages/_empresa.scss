@@ -1,0 +1,86 @@
+.box{
+    margin: 40px 0px 0px 0px;
+    padding: 0;
+    div{
+        .tPrincipal{
+            background-color: rgba(0, 0, 0, 0.616);
+            color: $cTexto;
+            font-weight: bold;
+            border-radius: 10px;
+            z-index: 1;
+            position: fixed;
+            top: 60px;
+            margin-left: 34%;
+            margin-right: 34%;
+        }
+    }
+    .empresa{
+        width: 100vw;
+        height: 90vh;
+        margin: 0;
+        .carousel{
+            .botones{
+                margin-left: -1500px;
+            }
+            .carousel-inner{
+                .carousel-item{
+                    width: 100%;
+                    height: 100%;
+                    .imgEmpresa{
+                        display: block;
+                        height: 90vh;
+                        margin: auto;
+                        margin-top: 10px;
+                    }
+                    .carouselCaption{
+                        display: flex;
+                        flex-direction: column;
+                        .titulo{
+                            color: $cTexto;
+                            position: fixed;
+                            left: 50px;
+                            top: 240px;
+                            animation-delay: .5s;
+                        }
+                        .historiaUno{
+                            display: block;
+                            color: $cTexto;
+                            margin-top: -350px;
+                            margin-left: 80%;
+                            width: 29vw;
+                            animation-delay: 1s;
+                        }
+                        .historiaDos{
+                            @extend .historiaUno;
+                            width: 23vw;
+                            margin-top: -350px;
+                            margin-left: 86%;
+                        }
+                        .historiaTres{
+                            @extend .historiaUno;
+                            width: 21vw;
+                            margin-top: -375px;
+                            margin-left: 90%;
+                        }
+                        .saberMas{
+                            animation-delay: 1.5s;
+                            position: fixed;
+                            bottom: 55px;
+                            right: 5vw;
+                            .aEmpresa{
+                                background-color: $acento;
+                                color: $secundario;
+                                border-radius: 5px;
+                                padding: 10px 30px;
+                                display: inline-block;
+                                text-transform: uppercase;
+                                text-decoration: none;
+                                text-wrap: nowrap;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

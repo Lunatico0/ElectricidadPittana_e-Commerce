@@ -1,0 +1,27 @@
+    .estiloFooter {
+        background-color: $secundario;
+        display: grid;
+        justify-content: center;
+        width: 100vw;
+        height: 50px;
+        .contenedorFooter{
+            .listaFooter {
+                display: flex;
+                padding-left: 0;
+                gap: 2rem;
+                .top {
+                    position: absolute;
+                    right: 50px;
+                    &:hover {
+                        text-decoration: underline;
+                        background-color: $color-Hover;
+                        cursor: pointer;
+                        border-radius: 5px;
+                        transform: scale(1.09);
+                        transition: all ease .5s;
+                    }
+                }
+            }
+        }
+    }
+

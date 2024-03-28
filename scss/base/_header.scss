@@ -1,0 +1,47 @@
+header{
+    .navBar{
+        background-color: $secundario;
+        div{
+            .tituloG {
+                color: #bad9e4;
+                font-size: 16px;
+                text-shadow: rgb(255, 208, 0) 1px 0 5px;
+                font-family: $font-titulo;
+                transition: all 300ms;
+                &:hover{
+                        padding: 5px 13px;
+                        color: $secundario;
+                }
+            }
+            div {
+                ul {
+                    li {
+                        .liNav{
+                            color: $cTexto;
+                            &:hover{
+                                color: $secundario;
+                            }
+                        }
+                        .aRight {
+                            position: absolute;
+                            right: 5px;
+                            text-wrap: nowrap;
+                            &:hover{
+                                padding: 5px 13px;
+                                color: $secundario;
+                                text-wrap: nowrap;
+                            }
+                        }
+                        .current{
+                            background-color: $acento;
+                            color: $secundario;
+                            border-radius: 5px;
+                            text-decoration: underline;
+                            padding: 5px 13px 7px 13px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

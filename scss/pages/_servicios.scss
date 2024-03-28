@@ -1,0 +1,37 @@
+main{
+    margin: 60px 0px 0px 0px;
+    .flexRow{
+        display: flex;
+        .infoImg{
+            @include infoImge(45vw, 650px, 450px);
+            view-timeline-name: --image;
+            view-timeline-axis: block;
+            animation-timeline: --image;
+            animation-name: zoomIn;
+            animation-range: entry 25% cover 50%;
+        }
+        .infoDescripcion{
+            font-size: map-get($descripcion, textTam);
+            color: map-get($descripcion, textColor);
+        }
+    }
+    .flexReverse{
+        display: flex;
+        flex-direction: row-reverse;
+        .infoImg{
+            @include infoImge(45vw, 624px, 416px);
+            view-timeline-name: --image;
+            view-timeline-axis: block;
+            animation-timeline: --image;
+            animation-name: zoomIn;
+            animation-range: entry 25% cover 50%;
+        }
+        .infoImgLast{
+            margin-bottom: 50px;
+        }
+        .infoDescripcion{
+            font-size: map-get($descripcion, textTam);
+            color: map-get($descripcion, textColor);
+        }
+    }
+}

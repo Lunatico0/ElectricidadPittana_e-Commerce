@@ -1,0 +1,42 @@
+.error{
+    padding: 0;
+    margin: 0;
+    .notFound{
+        width: 100vw;
+        height: 40px;
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-self: center;
+        img{
+            width: 50%;
+            margin-top: 90px;
+        }
+        h1{
+            position: fixed;
+            top: 80px;
+            width: 100vw;
+            background-color: $primario;
+            color: $secundario;
+        }
+        div{
+            button{
+                position: fixed;
+                bottom: 55px;
+                right: 5vw;
+                border-radius: 5px;
+                a{
+                    background-color: $acento;
+                    color: $secundario;
+                    border-radius: 5px;
+                    padding: 10px 30px;
+                    display: inline-block;
+                    text-transform: uppercase;
+                    text-decoration: none;
+                    text-wrap: nowrap;
+                }
+            }
+        }
+    }
+}

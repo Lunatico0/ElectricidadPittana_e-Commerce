@@ -1,0 +1,67 @@
+
+.home{
+    .container-xxl{
+        .row{
+            .col-lg-4{
+                .row{
+                    .col-12{
+                        .marcas {
+                            color: $cTexto;
+                            background-color: $background-h1;
+                            font-size: 20px;
+                        }
+                        
+                        .carousel {
+                            background-color: #2121219f;
+                            height: 400px;
+                            .carousel-inner {
+                                .carousel-item {
+                                    .imgCarrusel {
+                                        width: 350px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .row{
+                    .col-12{
+                        form{
+                            button{
+                                a{
+                                    color: white;
+                                    padding: 6px 56px;
+                                    &:hover{
+                                        text-decoration: none;
+                                        background-color: transparent;
+                                        color: white;
+                                        cursor: pointer;
+                                        border-radius: 5px;
+                                        padding: 0;
+                                        transform: scale(1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .logo {
+                margin: auto;
+                padding: 20px 0px;
+                .logoImg{
+                    display: block;
+                    margin-top: -15%;
+                    width: 100%;
+                }
+                .logoAuto{
+                    display: flex;
+                    width: 50%;
+                    margin-top: -20%;
+                    margin-left: 25%;
+                }
+            }
+        }
+    }
+}
+
