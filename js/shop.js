@@ -3,7 +3,7 @@ let productos = [
     {
         id: "polea",
         titulo: "Polea",
-        imagen: "../media/img/shop/polea_alt.png",
+        imagen: "../media/shop/polea_alt.png",
         categoria: {
             nombre: "Alternadores",
             id: "alternadores"
@@ -13,7 +13,7 @@ let productos = [
     {
         id: "rotor",
         titulo: "Rotor",
-        imagen: "../media/img/shop/rotor_alt.png",
+        imagen: "../media/shop/rotor_alt.png",
         categoria: {
             nombre: "Alternadores",
             id: "alternadores"
@@ -23,7 +23,7 @@ let productos = [
     {
         id: "estator",
         titulo: "Estator",
-        imagen: "../media/img/shop/estator_alt.png",
+        imagen: "../media/shop/estator_alt.png",
         categoria: {
             nombre: "Alternadores",
             id: "alternadores"
@@ -43,7 +43,7 @@ let productos = [
     {
         id: "impulsor",
         titulo: "Impulsor",
-        imagen: "../media/img/shop/impulsor_arr.png",
+        imagen: "../media/shop/impulsor_arr.png",
         categoria: {
             nombre: "Arranques",
             id: "arranques"
@@ -53,7 +53,7 @@ let productos = [
     {
         id: "solenoide",
         titulo: "Solenoide",
-        imagen: "../media/img/shop/solenoide_arr.png",
+        imagen: "../media/shop/solenoide_arr.png",
         categoria: {
             nombre: "Arranques",
             id: "arranques"
@@ -63,7 +63,7 @@ let productos = [
     {
         id: "campos",
         titulo: "Campos",
-        imagen: "../media/img/shop/campos_arr.png",
+        imagen: "../media/shop/campos_arr.png",
         categoria: {
             nombre: "Arranques",
             id: "arranques"
@@ -99,9 +99,7 @@ productos.forEach(producto => {
     if (!nombres.includes(producto.categoria.nombre)) {
         nombres.push(producto.categoria.nombre);
     }
-    console.log(producto.titulo);
 });
-
 
 for(let i = 0; i < ids.length; i++){
     const li = document.createElement("li");
@@ -113,13 +111,7 @@ for(let i = 0; i < ids.length; i++){
 
 const categorias = document.querySelectorAll(".botonCategoria");
 const liCarrito = document.createElement("li");
-liCarrito.innerHTML = `
-    <a class="btnShop botonCarrito" href="./carrito.html">
-        <i class="bi bi-cart4"></i> Carrito<span id="contCarrito" class="contCarrito">0</span>
-    </a>
-`;
 
-filtros.appendChild(liCarrito);
 const numerito = document.querySelector("#contCarrito");
 
 if(carritoLS){
@@ -128,7 +120,6 @@ if(carritoLS){
 } else {
     carrito = [];
 }
-
 
 //muestra los productos segun la categoria
 function cargarProductos(select){
@@ -181,7 +172,6 @@ function actualizarAgregarCarrito(){
         boton.addEventListener("click", agregarAlCarrito)
     })
 }
-
 
 function agregarAlCarrito(e){
     const idBoton = e.currentTarget.id;

@@ -9,6 +9,9 @@ const comprado = document.querySelector("#comprado");
 const comprar = document.querySelector("#comprar");
 const vaciar = document.querySelector("#carritoAccionesVaciar")
 const total = document.querySelector("#total")
+comprar.addEventListener("click", comprarCarro);
+vaciar.addEventListener("click", vaciarCarro);
+cargarItems();
 
 function cargarItems(){
     if(carrito && carrito.length > 0){
@@ -57,7 +60,6 @@ function cargarItems(){
     actualizarTotal();
 }
 
-
 function botonesEliminar(){
     eliminar = document.querySelectorAll(".eliminarArticulo");
 
@@ -65,8 +67,6 @@ function botonesEliminar(){
         boton.addEventListener("click", eliminarItem)
     });
 }
-
-cargarItems();
 
 function eliminarItem(e){
     const idBoton = e.currentTarget.id;
@@ -80,7 +80,6 @@ function eliminarItem(e){
     localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
 }
 
-vaciar.addEventListener("click", vaciarCarro);
 function vaciarCarro(){
     carrito.length = 0;
     localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
@@ -92,7 +91,6 @@ function actualizarTotal(){
     total.innerText = `$${totalCalculado.toLocaleString('es-AR')}`;
 }
 
-comprar.addEventListener("click", comprarCarro);
 function comprarCarro(){
     carrito.length = 0;
     localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));

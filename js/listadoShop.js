@@ -1,86 +1,129 @@
 const productos = JSON.parse(localStorage.getItem("productos")) || [];
 
-document.addEventListener("DOMContentLoaded", function () {
-    const formAgregarProducto = document.getElementById("formularioAgregarProducto");
-    const selectCategoria = document.getElementById("categoria");
-    const inputNuevaCategoria = document.getElementById("nuevaCategoria");
+document.addEventListener("DOMContentLoaded", () => {
 
-    const categoriasArray = productos.map(producto => producto.categoria);
-    const categorias = new Set(categoriasArray.map(categoria => categoria.nombre));
-    categorias.add("Otra");
+    const agregarProducto = document.querySelector("#formularioAgregarProducto");
+    const categoriaSelect = document.querySelector("#categoria");
+    const newCategoria = document.querySelector("#nuevaCategoria");
+    const buscar = document.querySelector("#inputBusqueda");
+    const contenedor = document.querySelector("#contenedorProductos");
+    const categoriasArr = productos.map(producto => producto.categoria);
+    const categorias = new Set (categoriasArr.map(categoria => categoria.nombre));
+    const otraCategoria = "Otra";
+    categorias.add(otraCategoria);
 
-    // Llenar el select con las categorías
+    //? Rellena las categorias
     categorias.forEach(categoria => {
-        const option = document.createElement("option");
-        option.textContent = categoria;
-        selectCategoria.appendChild(option);
+        const opcion = document.createElement("option");
+        opcion.textContent = categoria.charAt(0).toUpperCase() + categoria.slice(1) ;
+        categoriaSelect.appendChild(opcion);
     });
 
-    // Mostrar el input de nueva categoría si se selecciona "Otra"
-    selectCategoria.addEventListener("change", function () {
-        if (selectCategoria.value === "Otra") {
-            inputNuevaCategoria.style.display = "block";
-            inputNuevaCategoria.required = true;
-        } else {
-            inputNuevaCategoria.style.display = "none";
-            inputNuevaCategoria.required = false;
-        }
-    });
-
-    if (categorias.size === 1) {
-        selectCategoria.value = "";
+    //? Mostrar el input para agregar una nueva categoría si no hay productos
+    if (productos.length === 0) {
+        newCategoria.classList.remove("disabled");
+        newCategoria.required = true;
+        categoriaSelect.value = otraCategoria;
     }
 
-    formAgregarProducto.addEventListener("submit", function (event) {
-        event.preventDefault();
+    //? Selector de categorias
+    categoriaSelect.addEventListener("change", () => {
+        if(categoriaSelect.value === otraCategoria){
+            newCategoria.classList.remove("disabled")
+            newCategoria.required = true;
+        } else {
+            newCategoria.classList.add("disabled");
+            newCategoria.required = false;
+        }
+    });
 
-        // Obtener los valores del formulario
-        const titulo = formAgregarProducto.elements.titulo.value;
-        const imagen = formAgregarProducto.elements.imagen.value;
-        const categoria = inputNuevaCategoria.value || selectCategoria.value;
-        const precio = parseFloat(formAgregarProducto.elements.precio.value);
-        const id = categoria.toLowerCase();
-
-        // Validar que los campos no estén vacíos
-        if (!titulo || !imagen || !categoria || !precio) {
-            alert("Por favor, complete todos los campos.");
+    //!Escuchador de eventos de categorias
+    agregarProducto.addEventListener("submit", (e) => {
+        e.preventDefault();
+    
+        // Obtiene los valores del formulario
+        const titulo = agregarProducto.elements.titulo.value.trim();
+        const imagen = agregarProducto.elements.imagen.value.trim();
+        const categoria = (newCategoria.value || categoriaSelect.value).trim();
+        const precio = parseFloat(agregarProducto.elements.precio.value.trim().replace(',', '.')); // Reemplaza comas por puntos para decimales
+        const idCat = categoria.toLowerCase().replace(/\s/g, '_');
+        const id = titulo.toLowerCase().replace(/\s/g, '_');
+    
+        // Verifica que todos los campos estén completos
+        if (!titulo || !imagen || !categoria || !precio || isNaN(precio) || !id) {
+            Toastify({
+                text: "Por favor, complete todos los campos.",
+                duration: 3000,
+                gravity: "top",
+                close: true,
+                backgroundColor: "linear-gradient(18deg, rgba(122,122,122,1) 0%, rgba(83,82,82,1) 47%, rgba(42,42,42,1) 100%)",
+                style: {
+                    color: "#c9c9c9",
+                }
+            }).showToast();
             return;
         }
-
-        // Crear el nuevo producto
-        const nuevoProducto = new Producto(
-            titulo.toLowerCase().replace(/\s/g, '_'), // ID del producto basado en el título
+    
+        //* Verifica si el producto ya existe
+        if (productos.some(producto => producto.id === id)) {
+            Toastify({
+                text: "Producto existente",
+                duration: 3000,
+                gravity: "top",
+                close: true,
+                backgroundColor: "linear-gradient(18deg, rgba(122,122,122,1) 0%, rgba(83,82,82,1) 47%, rgba(42,42,42,1) 100%)",
+                style: {
+                    color: "#c9c9c9",
+                }
+            }).showToast();
+            return;
+        }
+    
+        //* Crea el nuevo item
+        const nuevoItem = new Producto(
+            id, //!guarda en la clave "ID" el nombre del producto en minusculas y reemplazando los espacios con "_"
             titulo,
             imagen,
             {
-                nombre: categoria,
-                id: id.split(' ').join('_')
+                nombre: (categoria.charAt(0).toUpperCase() + categoria.slice(1)) ,
+                id: idCat  //!guarda en la clave "ID" el nombre de la categoria del producto en minusculas y reemplazando los espacios con "_"
             },
             precio
         );
-
-        productos.push(nuevoProducto);
-
-        // Actualizar el localStorage con el nuevo array de productos
+    
+        // Agrega el nuevo item al array de productos
+        productos.push(nuevoItem);
+    
+        // Actualiza el LocalStorage
         localStorage.setItem("productos", JSON.stringify(productos));
+    
+        // Limpia el formulario
+        agregarProducto.reset();
+    
+        // Muestra un mensaje de éxito
+        Toastify({
+            text: "Producto agregado exitosamente",
+            duration: 3000,
+            gravity: "top",
+            close: true,
+            backgroundColor: "linear-gradient(18deg, rgba(122,122,122,1) 0%, rgba(83,82,82,1) 47%, rgba(42,42,42,1) 100%)",
+            style: {
+                color: "#c9c9c9",
+            }
+        }).showToast();
+    });    
 
-        // Limpiar el formulario
-        formAgregarProducto.reset();
+    buscar.addEventListener("input", () => {
+        const buscado = buscar.value.trim().toLowerCase();
+        const encontrado = buscarProducto(buscado);
 
-        alert("Producto agregado exitosamente.");
-    });
+        //Si se encuentra algun producto muestra los detalles
+        if(encontrado.length > 0){
+            //* Limpia el contenedor
+            contenedor.innerHTML = "";
 
-    const inputBusqueda = document.getElementById("inputBusqueda");
-    const contenedorProductos = document.getElementById("contenedorProductos");
-
-    inputBusqueda.addEventListener("input", function () {
-        const valorBusqueda = inputBusqueda.value.trim().toLowerCase();
-        const productosEncontrados = buscarProductoPorCoincidencia(valorBusqueda);
-
-        if (productosEncontrados.length > 0) {
-            // Si se encuentran productos, mostrar los detalles
-            contenedorProductos.innerHTML = "";
-            productosEncontrados.forEach(producto => {
+            //* Muestra cada elemento del array de productos coincidentes
+            encontrado.forEach(producto => {
                 const div = document.createElement("div");
                 div.classList.add("item");
                 div.innerHTML = `
@@ -91,48 +134,75 @@ document.addEventListener("DOMContentLoaded", function () {
                         <button class="eliminarProducto" id="${producto.id}">Eliminar item</button>
                     </div>
                 `;
-                contenedorProductos.appendChild(div);
+                contenedor.append(div);
 
-                // Agregar evento de eliminación para cada botón
-                const botonEliminar = div.querySelector(".eliminarProducto");
-                botonEliminar.addEventListener("click", function () {
+                //?Agrega evento para eliminar con un boton
+                const btnEliminar = div.querySelector(".eliminarProducto");
+                btnEliminar.addEventListener("click", () => {
                     eliminarProducto(producto.id);
                 });
             });
         } else {
-            // Si no se encuentran productos, mostrar un mensaje
-            contenedorProductos.innerHTML = "<p>No se encontraron productos.</p>";
+            //! Si no encuentra coincidencias muestra el siguient mensaje
+            contenedor.innerHTML = "<p>✖️No se encontraron coincidencias✖️.<p/>";
         }
     });
 });
 
-function buscarProductoPorCoincidencia(terminoBusqueda) {
-    const terminoBusquedaLower = terminoBusqueda.toLowerCase();
-    const productosEncontrados = productos.filter(producto => producto.titulo.toLowerCase().includes(terminoBusquedaLower));
+//* Funcion busca por coincidencia
+function buscarProducto(item) {
+    const productosEncontrados = productos.filter(producto => producto.titulo.toLowerCase().includes(item.toLowerCase()));
     return productosEncontrados;
 }
 
-// Función para eliminar un producto por ID
-function eliminarProducto(id) {
+//* Funcion para Eliminar Productos
+function eliminarProducto(id){
     const indice = productos.findIndex(producto => producto.id === id);
+
+    //? Consulta en caso de no haber ningun elemento con ese ID devuelve el error
     if (indice !== -1) {
-        // Eliminar el producto del arreglo
+
+        // Eliminar el producto del array
         const productoEliminado = productos.splice(indice, 1)[0];
-        console.log(`Producto "${productoEliminado.titulo}" eliminado.`);
-        // Actualizar el localStorage
+
+        Toastify({
+            text: `Producto "${productoEliminado.titulo}" eliminado.`,
+            duration: 3000,
+            gravity: "top",
+            close: true,
+            backgroundColor: "linear-gradient(18deg, rgba(122,122,122,1) 0%, rgba(83,82,82,1) 47%, rgba(42,42,42,1) 100%)",
+            style: {
+                color: "#c9c9c9",
+            }
+        }).showToast();
+
+        //* Actualiza el localStorage
         localStorage.setItem("productos", JSON.stringify(productos));
-        // Volver a mostrar los productos después de la eliminación
-        const inputBusqueda = document.getElementById("inputBusqueda");
-        inputBusqueda.dispatchEvent(new Event("input"));
+
+        // Vuelve a mostrar los productos despues de la eliminacion
+        const buscar = document.querySelector("#inputBusqueda");
+        buscar.dispatchEvent(new Event("input"));
     } else {
-        console.log(`No se encontró ningún producto con el ID "${id}".`);
+        Toastify({
+            text: "Producto Inexistente",
+            duration: 3000,
+            gravity: "top",
+            close: true,
+            backgroundColor: "linear-gradient(18deg, rgba(122,122,122,1) 0%, rgba(83,82,82,1) 47%, rgba(42,42,42,1) 100%)",
+            style: {
+                color: "#c9c9c9",
+            }
+        }).showToast();
     }
 }
 
-function Producto(id, titulo, imagen, categoria, precio) {
-    this.id = id;
-    this.titulo = titulo;
-    this.imagen = imagen;
-    this.categoria = categoria;
-    this.precio = precio;
+//! Constructor de Objetos para los Items
+class Producto {
+    constructor(id, titulo, imagen, categoria, precio) {
+        this.id = id;
+        this.titulo = titulo;
+        this.imagen = imagen;
+        this.categoria = categoria;
+        this.precio = precio;
+    }
 }

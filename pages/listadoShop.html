@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Producto | Electricidad Pittana</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
@@ -57,11 +58,11 @@
                     <select id="categoria" name="categoria" required>
                         <!-- Opciones de categorías se llenarán dinámicamente desde el script -->
                     </select>
-                    <input type="text" id="nuevaCategoria" name="nuevaCategoria" placeholder="Nueva categoría" style="display: none;">
+                    <input type="text" id="nuevaCategoria" name="nuevaCategoria" class="disabled" placeholder="Nueva categoría">
                 </div>
                 <div>
                     <label for="precio">Precio:</label>
-                    <input type="number" id="precio" name="precio" required>
+                    <input type="text" pattern="[0-9]+([\.,][0-9]+)?" id="precio" name="precio" required>
                 </div>
                 <button class="agregarProducto" type="submit">Agregar Producto</button>
             </form>
@@ -103,6 +104,7 @@
             </div>
         </div>
     </footer>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../js/listadoShop.js"></script>
 </body>
