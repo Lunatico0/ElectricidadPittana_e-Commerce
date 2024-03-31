@@ -402,6 +402,9 @@ main div .row div form div button a:hover {
   grid-template-columns: 1fr 4fr;
   background-color: #333;
 }
+.content .headerMobile {
+  display: none;
+}
 .content .filtros {
   position: sticky;
   top: 70px;
@@ -456,6 +459,9 @@ main div .row div form div button a:hover {
   font-size: 0.85rem;
   color: rgba(122, 110, 110, 0.4588235294);
 }
+.content .filtros .headerPc .botonCerrar {
+  display: none;
+}
 .content .contenido {
   background-color: #c9c9c9;
   margin: 1rem;
@@ -484,50 +490,47 @@ main div .row div form div button a:hover {
 }
 .content .contenido .contenedorCarrito .carritoItem .itemProducto {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: #c0c0c0;
   color: #333;
-  padding: 0.5rem;
-  padding-right: 1.5rem;
   border-radius: 1rem;
 }
-.content .contenido .contenedorCarrito .carritoItem .itemProducto .carritoProductoCantidad,
-.content .contenido .contenedorCarrito .carritoItem .itemProducto .carritoProductoPrecio,
-.content .contenido .contenedorCarrito .carritoItem .itemProducto .carritoProductoSubtotal {
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .imagen {
+  padding: 1rem;
+}
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .imagen img {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem;
+  padding-right: 1.5rem;
+}
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoCantidad,
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoPrecio,
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoSubtotal,
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoTitulo {
   width: 0rem;
   display: flex;
   flex-direction: column;
   text-align: center;
 }
-.content .contenido .contenedorCarrito .carritoItem .itemProducto .carritoProductoTitulo {
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  margin-inline: -15%;
-  max-height: 7rem;
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoTitulo {
+  width: 10vw;
 }
-.content .contenido .contenedorCarrito .carritoItem .itemProducto .carritoProductoTitulo h3 {
-  max-width: max-content;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-height: 3rem;
-}
-.content .contenido .contenedorCarrito .carritoItem .itemProducto .eliminarArticulo {
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .eliminarArticulo {
   border: 0;
   background-color: transparent;
   color: red;
   cursor: pointer;
 }
-.content .contenido .contenedorCarrito .carritoItem .itemProducto h4 {
+.content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles h4 {
   font-size: 0.75rem;
-}
-.content .contenido .contenedorCarrito .carritoItem .itemProducto img {
-  height: 8rem;
-  width: 8rem;
-  border-radius: 0.75rem;
-  object-fit: cover;
 }
 .content .contenido .contenedorCarrito .carritoAcciones {
   display: flex;
@@ -688,7 +691,7 @@ main div .row div form div button a:hover {
   transition: all ease 0.5s;
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 845px) {
   a,
   label,
   p {
@@ -811,6 +814,163 @@ main div .row div form div button a:hover {
   }
   .estiloFooter .contenedorFooter .listaFooter .top {
     position: static;
+  }
+}
+@media only screen and (max-width: 845px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.2rem;
+    padding: 1rem;
+    padding-right: 0;
+    margin-bottom: -5rem;
+  }
+  .content .filtros {
+    top: 0;
+    height: 100vh;
+    position: fixed;
+    z-index: 9;
+    max-width: 13rem;
+    width: fit-content;
+    background-color: #333;
+    left: 0;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.65);
+    transform: translateX(-100%);
+    transition: all ease 300ms;
+    opacity: 0;
+    visibility: hidden;
+  }
+  .content .filtros nav .menu .current {
+    border-radius: 0.5rem;
+    width: fit-content;
+  }
+  .content .filtros footer h3 {
+    text-wrap: wrap;
+  }
+  .content .filtros .headerPc .botonCerrar {
+    display: block;
+    background-color: transparent;
+    border: 0;
+    font-size: 2rem;
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    top: 3rem;
+  }
+  .content .filtroMobile {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    transition: all ease 300ms;
+  }
+  .content .contenido {
+    padding: 1rem;
+    min-height: 76vh;
+    position: relative;
+    top: 3rem;
+    margin-bottom: 6rem;
+  }
+  .content .contenido .tituloPrincipal {
+    text-align: center;
+  }
+  .content .contenido .contenedor .item {
+    flex: 12rem;
+    max-width: 12rem;
+  }
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto {
+    flex-direction: row;
+    border-radius: 1.5rem;
+  }
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .imagen img {
+    display: none;
+  }
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles {
+    flex-direction: column;
+    background: center;
+    background-size: cover;
+    position: relative;
+    border-radius: 1.5rem;
+    background-repeat: no-repeat;
+    background-color: rgb(255, 255, 255);
+    background-size: 50%;
+    position: relative;
+    border-radius: 1.5rem;
+  }
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles > ::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 1.5rem;
+  }
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoCantidad,
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoPrecio,
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoSubtotal,
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoTitulo {
+    opacity: 1;
+    width: auto;
+  }
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoCantidad h3, .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoCantidad h4,
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoPrecio h3,
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoPrecio h4,
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoSubtotal h3,
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoSubtotal h4,
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoTitulo h3,
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoTitulo h4 {
+    color: #212121;
+    font-size: 14px;
+  }
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoCantidad h4,
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoPrecio h4,
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoSubtotal h4,
+  .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .carritoProductoTitulo h4 {
+    font-size: 16px;
+  }
+  .content .contenido .contenedorCarrito .carritoAcciones {
+    flex-direction: column-reverse;
+  }
+  .content .contenido .contenedorCarrito .carritoAcciones .acciones1 .carritoAccionesVaciar {
+    font-size: 12px;
+  }
+  .content .contenido .contenedorCarrito .carritoAcciones .acciones2 {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+  .content .contenido .contenedorCarrito .carritoAcciones .acciones2 .carritoAccionesTotal {
+    font-size: 14px;
+  }
+  .content .contenido .contenedorCarrito .carritoAcciones .acciones2 .carritoAccionesComprar {
+    font-size: 14px;
+    text-wrap: nowrap;
+  }
+  .content .contenido .contenedorCarrito .carritoAcciones p {
+    font-size: 14px;
+  }
+  .content .headerMobile {
+    position: fixed;
+    display: flex;
+    padding: 1rem;
+    padding-bottom: 0;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9;
+    background-color: #333;
+    width: 95%;
+  }
+  .content .headerMobile .tituloFiltros {
+    text-align: center;
+  }
+  .content .headerMobile .botonFiltro {
+    background-color: transparent;
+    border: 0;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  .content .headerMobile .botonFiltro > i::before {
+    vertical-align: baseline;
   }
 }
 

@@ -80,6 +80,32 @@ if(!localStorage.getItem("productos")){
 // Se comprueba si existen productos en el localStorage, de lo contrario se inicializa con un array vacío
 productos = JSON.parse(localStorage.getItem("productos")) || [];
 
+const carritoItems = document.querySelectorAll('.itemProducto');
+
+// Aquí defines tu media query
+const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+// Función para cambiar la imagen por background-image
+function cambiarImagenBackground() {
+    carritoItems.forEach(item => {
+        item.classList.add('disabled');
+        const imagenSrc = item.querySelector('.imagen img').src;
+        item.style.backgroundImage = `url(${imagenSrc})`;
+    });
+}
+
+// Verifica si la media query se cumple inicialmente
+if (mediaQuery.matches) {
+    cambiarImagenBackground();
+}
+
+// Agrega un listener para cambiar la imagen cuando la media query se active
+mediaQuery.addListener((event) => {
+    if (event.matches) {
+        cambiarImagenBackground();
+    }
+});
+
 // Se seleccionan los elementos del DOM
 const contenedorProductos = document.querySelector("#productos");
 const filtros = document.querySelector("#filtros");
@@ -87,6 +113,9 @@ const tituloPrincipal = document.querySelector("#tituloPrincipal");
 const tituloFiltros = document.querySelector("#tituloFiltros");
 const carritoLS = localStorage.getItem("productosEnCarrito");
 const productosBajadoLS = JSON.parse(localStorage.getItem("productos")) || [];
+const botonFiltro = document.querySelector("#botonFiltro");
+const botonCerrar = document.querySelector("#botonCerrar");
+const aside = document.querySelector(".filtros");
 let agregarCarrito = document.querySelectorAll(".agregarProducto");
 let carrito;
 let ids = [];
@@ -124,6 +153,7 @@ if(carritoLS){
 //muestra los productos segun la categoria
 function cargarProductos(select){
     productos = JSON.parse(localStorage.getItem("productos")) || [];
+    responsive();
     contenedorProductos.innerHTML = "";
     select.forEach(producto => {
         const div = document.createElement("div");
@@ -147,7 +177,10 @@ categorias.forEach( boton => {
     boton.addEventListener("click", (e) => {
 
         categorias.forEach( boton => boton.classList.remove("current"));
+        
         e.currentTarget.classList.add("current");
+        aside.classList.remove("filtroMobile");
+        botonFiltro.classList.remove("disabled");
 
         if(e.currentTarget.id != "todos"){
             const findProductos = productos.find(producto => producto.categoria.id === e.currentTarget.id);
@@ -201,4 +234,15 @@ function obtenerIds(){
         }
     });
     return id;
+}
+
+function responsive(){
+    botonFiltro.addEventListener("click", () => {
+        aside.classList.add("filtroMobile");
+        botonFiltro.classList.add("disabled");
+    })
+    botonCerrar.addEventListener("click", () => {
+        aside.classList.remove("filtroMobile");
+        botonFiltro.classList.remove("disabled");
+    })
 }

@@ -3,12 +3,13 @@
     display: grid;
     grid-template-columns: 1fr 4fr;
     background-color: $background-h1;
+    .headerMobile{
+        display: none;
+    }
     .filtros {
         position: sticky;
         top: 70px;
         height: 82vh;
-        // padding: 2rem;
-        // padding-right: 0;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -64,6 +65,11 @@
                 color: $color-Hover;
             }
         }
+        .headerPc{
+            .botonCerrar{
+                display: none;
+            }
+        }
     }
     .contenido {
         background-color: $cTexto;
@@ -90,51 +96,47 @@
                 gap: 1rem;
                 .itemProducto{
                     display: flex;
-                    justify-content: space-between;
-                    align-items: center;
                     background-color: $carritoItem;
                     color: $background-h1;
-                    padding: .5rem;
-                    padding-right: 1.5rem;
                     border-radius: 1rem;
-                    .carritoProductoCantidad,
-                    .carritoProductoPrecio,
-                    .carritoProductoSubtotal{
-                        width: 0rem;
-                        display: flex;
-                        flex-direction: column;
-                        text-align: center;
-
-                    }
-                    .carritoProductoTitulo{
-                        width: 30%;
-                        display: flex;
-                        flex-direction: column;
-                        margin-inline: -15%;
-                        max-height: 7rem;
-                        h3{
-                            max-width: max-content;
-                            // overflow: hidden;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            max-height: 3rem;
+                    .imagen{
+                        padding: 1rem;
+                        img{
+                            height: 8rem;
+                            width: 8rem;
+                            border-radius: .75rem;
+                            object-fit: cover;
                         }
                     }
-                    .eliminarArticulo{
-                        border: 0;
-                        background-color: transparent;
-                        color: red;
-                        cursor: pointer;
-                    }
-                    h4{
-                        font-size: .75rem;
-                    }
-                    img{
-                        height: 8rem;
-                        width: 8rem;
-                        border-radius: .75rem;
-                        object-fit: cover;
+                    .detalles{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 100%;
+                        padding: .5rem;
+                        padding-right: 1.5rem;
+                        .carritoProductoCantidad,
+                        .carritoProductoPrecio,
+                        .carritoProductoSubtotal,
+                        .carritoProductoTitulo{
+                            width: 0rem;
+                            display: flex;
+                            flex-direction: column;
+                            text-align: center;
+
+                        }
+                        .carritoProductoTitulo{
+                            width: 10vw;
+                        }
+                        .eliminarArticulo{
+                            border: 0;
+                            background-color: transparent;
+                            color: red;
+                            cursor: pointer;
+                        }
+                        h4{
+                            font-size: .75rem;
+                        }
                     }
                 }
             }
@@ -190,7 +192,6 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-evenly;
-            
             gap: 1rem;
             .item {
                 flex: 250px;

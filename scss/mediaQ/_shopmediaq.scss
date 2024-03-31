@@ -1,0 +1,170 @@
+@media only screen and (max-width: 845px) {
+    .content{
+        display: flex;
+        flex-direction: column;
+        margin-top: 2.2rem;
+        padding: 1rem;
+        padding-right: 0;
+        margin-bottom: -5rem;
+        .filtros{
+            top: 0;
+            height: 100vh;
+            position: fixed;
+            z-index: 9;
+            max-width: 13rem;
+            width: fit-content;
+            background-color: $background-h1;
+            left: 0;
+            box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .65);
+            transform: translateX(-100%);
+            transition: all ease 300ms;
+            opacity: 0;
+            visibility: hidden;
+            nav{
+                .menu{
+                    .current{
+                        border-radius: .5rem;
+                        width: fit-content;
+                    }
+                }
+            }
+            footer{
+                h3{
+                    text-wrap: wrap;
+                }
+            }
+            .headerPc{
+                .botonCerrar{
+                    display: block;
+                    background-color: transparent;
+                    border: 0;
+                    font-size: 2rem;
+                    cursor: pointer;
+                    position: absolute;
+                    right: 1rem;
+                    top: 3rem;
+                }
+            }
+        }
+        .filtroMobile{
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+            transition: all ease 300ms;
+        }
+        .contenido{
+            padding: 1rem;
+            min-height: 76vh;
+            position: relative;
+            top: 3rem;
+            margin-bottom: 6rem;
+            .tituloPrincipal{
+                text-align: center;
+            }
+            .contenedor{
+                .item{
+                    flex: 12rem;
+                    max-width: 12rem;
+                }
+            }
+            .contenedorCarrito{
+                .carritoItem{
+                    .itemProducto{
+                        flex-direction: row;
+                        border-radius: 1.5rem;
+                        .imagen{
+                            img{
+                                display: none;
+                            }
+                        }
+                        .detalles{
+                            flex-direction: column;
+                            background: center;
+                            background-size: cover;
+                            position: relative;
+                            border-radius: 1.5rem;
+                            background-repeat: no-repeat;
+                            background-color: rgb(255, 255, 255);
+                            background-size: 50%;
+                            position: relative;
+                            border-radius: 1.5rem;
+                            > ::before{
+                                content: "";
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                background-color: rgba(0, 0, 0, 0.15);
+                                border-radius: 1.5rem;
+                            }
+                            .carritoProductoCantidad,
+                            .carritoProductoPrecio,
+                            .carritoProductoSubtotal,
+                            .carritoProductoTitulo{
+                                opacity: 1;
+                                width: auto;
+                                h3, h4{
+                                    color: $fondo-body;
+                                    font-size: 14px;
+                                }
+                                h4{
+                                    font-size: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .carritoAcciones{
+                    flex-direction: column-reverse;
+                    .acciones1{
+                        .carritoAccionesVaciar{
+                            font-size: 12px;
+                        }
+                    }
+                    .acciones2{
+                        display: flex;
+                        margin-bottom: 1rem;
+                        .carritoAccionesTotal{
+                            font-size: 14px;
+                        }
+                        .carritoAccionesComprar{
+                            font-size: 14px;
+                            text-wrap: nowrap;
+                        }
+                    }
+                    p{
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+        .headerMobile{
+            position: fixed;
+            display: flex;
+            padding: 1rem;
+            padding-bottom: 0;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 9;
+            background-color: $background-h1;
+            width: 95%;
+            .tituloFiltros{
+                text-align: center;
+            }
+            .botonFiltro{
+                background-color: transparent;
+                border: 0;
+                font-size: 2rem;
+                cursor: pointer;
+                > i::before{
+                    vertical-align: baseline;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 500px){
+
+}
