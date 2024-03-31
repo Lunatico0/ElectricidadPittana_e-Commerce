@@ -163,8 +163,79 @@
             }
         }
     }
-}
-
-@media only screen and (max-width: 500px){
-
+    .listado{
+        display: flex;
+        flex-direction: column;
+        .formAdd{
+            position: relative;
+            #formularioAgregarProducto{
+                margin-right: 1rem;
+                >div{
+                    > input{
+                        width: 12rem;
+                    }
+                    > label{
+                        width: auto;
+                    }
+                    > select{
+                        position: relative;
+                        left: 0;
+                    }
+                }
+                .agregarProducto {
+                    width: 49%;
+                    border: 0;
+                    background-color: $cTexto;
+                    color: $background-h1;
+                    text-transform: uppercase;
+                    border-radius: 2rem;
+                    cursor: pointer;
+                    border: solid 1px $cTexto;
+                    transition: background-color .2s, color .2s;
+                    &:hover {
+                        background-color: $background-h1;
+                        color: $cTexto;
+                    }
+                }
+                .volveraShop {
+                    width: 49%;
+                    border: 0;
+                    background-color: $cTexto;
+                    color: $background-h1;
+                    text-transform: uppercase;
+                    border-radius: 2rem;
+                    cursor: pointer;
+                    border: solid 1px $cTexto;
+                    transition: background-color .2s, color .2s;
+                    &:hover {
+                        background-color: $background-h1;
+                        color: $cTexto;
+                    }
+                    a {
+                        color: $background-h1;
+                        background-color: $cTexto;
+                        text-decoration: none;
+                        font-size: 1rem;
+                        &:hover {
+                            text-decoration: none;
+                            background-color: $background-h1;
+                            color: $cTexto;
+                            cursor: pointer;
+                            border-radius: 0;
+                            padding: 0;
+                            transform: none;
+                            transition: 1ms;
+                        }
+                    }
+                }
+            }
+        }
+        .delete{
+            .search{
+                display: flex;
+                flex-direction: column;
+                margin-right: 1rem;
+            }
+        }
+    }
 }

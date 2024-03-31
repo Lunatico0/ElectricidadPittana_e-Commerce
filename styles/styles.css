@@ -658,8 +658,52 @@ main div .row div form div button a:hover {
   grid-area: input;
   width: 15vw;
 }
+.listado .formAdd #formularioAgregarProducto .agregarProducto {
+  width: 49%;
+  border: 0;
+  background-color: #c9c9c9;
+  color: #333;
+  text-transform: uppercase;
+  border-radius: 2rem;
+  cursor: pointer;
+  border: solid 1px #c9c9c9;
+  transition: background-color 0.2s, color 0.2s;
+}
+.listado .formAdd #formularioAgregarProducto .agregarProducto:hover {
+  background-color: #333;
+  color: #c9c9c9;
+}
+.listado .formAdd #formularioAgregarProducto .volveraShop {
+  width: 49%;
+  border: 0;
+  background-color: #c9c9c9;
+  color: #333;
+  text-transform: uppercase;
+  border-radius: 2rem;
+  cursor: pointer;
+  border: solid 1px #c9c9c9;
+  transition: background-color 0.2s, color 0.2s;
+}
+.listado .formAdd #formularioAgregarProducto .volveraShop:hover {
+  background-color: #333;
+  color: #c9c9c9;
+}
+.listado .formAdd #formularioAgregarProducto .volveraShop a {
+  all: initial;
+  width: 49%;
+  border: 0;
+  background-color: #c9c9c9;
+  color: #333;
+  text-transform: uppercase;
+}
+.listado .formAdd #formularioAgregarProducto .volveraShop a:hover {
+  background-color: #333;
+  color: #c9c9c9;
+}
 .listado .delete {
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .disabled {
@@ -971,6 +1015,77 @@ main div .row div form div button a:hover {
   }
   .content .headerMobile .botonFiltro > i::before {
     vertical-align: baseline;
+  }
+  .listado {
+    display: flex;
+    flex-direction: column;
+  }
+  .listado .formAdd {
+    position: relative;
+  }
+  .listado .formAdd #formularioAgregarProducto {
+    margin-right: 1rem;
+  }
+  .listado .formAdd #formularioAgregarProducto > div > input {
+    width: 12rem;
+  }
+  .listado .formAdd #formularioAgregarProducto > div > label {
+    width: auto;
+  }
+  .listado .formAdd #formularioAgregarProducto > div > select {
+    position: relative;
+    left: 0;
+  }
+  .listado .formAdd #formularioAgregarProducto .agregarProducto {
+    width: 49%;
+    border: 0;
+    background-color: #c9c9c9;
+    color: #333;
+    text-transform: uppercase;
+    border-radius: 2rem;
+    cursor: pointer;
+    border: solid 1px #c9c9c9;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .listado .formAdd #formularioAgregarProducto .agregarProducto:hover {
+    background-color: #333;
+    color: #c9c9c9;
+  }
+  .listado .formAdd #formularioAgregarProducto .volveraShop {
+    width: 49%;
+    border: 0;
+    background-color: #c9c9c9;
+    color: #333;
+    text-transform: uppercase;
+    border-radius: 2rem;
+    cursor: pointer;
+    border: solid 1px #c9c9c9;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .listado .formAdd #formularioAgregarProducto .volveraShop:hover {
+    background-color: #333;
+    color: #c9c9c9;
+  }
+  .listado .formAdd #formularioAgregarProducto .volveraShop a {
+    color: #333;
+    background-color: #c9c9c9;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  .listado .formAdd #formularioAgregarProducto .volveraShop a:hover {
+    text-decoration: none;
+    background-color: #333;
+    color: #c9c9c9;
+    cursor: pointer;
+    border-radius: 0;
+    padding: 0;
+    transform: none;
+    transition: 1ms;
+  }
+  .listado .delete .search {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
   }
 }
 

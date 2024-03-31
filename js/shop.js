@@ -80,32 +80,6 @@ if(!localStorage.getItem("productos")){
 // Se comprueba si existen productos en el localStorage, de lo contrario se inicializa con un array vacío
 productos = JSON.parse(localStorage.getItem("productos")) || [];
 
-const carritoItems = document.querySelectorAll('.itemProducto');
-
-// Aquí defines tu media query
-const mediaQuery = window.matchMedia('(max-width: 768px)');
-
-// Función para cambiar la imagen por background-image
-function cambiarImagenBackground() {
-    carritoItems.forEach(item => {
-        item.classList.add('disabled');
-        const imagenSrc = item.querySelector('.imagen img').src;
-        item.style.backgroundImage = `url(${imagenSrc})`;
-    });
-}
-
-// Verifica si la media query se cumple inicialmente
-if (mediaQuery.matches) {
-    cambiarImagenBackground();
-}
-
-// Agrega un listener para cambiar la imagen cuando la media query se active
-mediaQuery.addListener((event) => {
-    if (event.matches) {
-        cambiarImagenBackground();
-    }
-});
-
 // Se seleccionan los elementos del DOM
 const contenedorProductos = document.querySelector("#productos");
 const filtros = document.querySelector("#filtros");
@@ -245,4 +219,4 @@ function responsive(){
         aside.classList.remove("filtroMobile");
         botonFiltro.classList.remove("disabled");
     })
-}
+};

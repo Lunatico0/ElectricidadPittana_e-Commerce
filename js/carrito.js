@@ -70,7 +70,6 @@ function cargarItems() {
 
 function botonesEliminar() {
     eliminar = document.querySelectorAll(".eliminarArticulo");
-
     eliminar.forEach(boton => {
         boton.addEventListener("click", eliminarItem)
     });

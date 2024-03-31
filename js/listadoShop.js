@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const categoriasArr = productos.map(producto => producto.categoria);
     const categorias = new Set (categoriasArr.map(categoria => categoria.nombre));
     const otraCategoria = "Otra";
+
     categorias.add(otraCategoria);
 
     //? Rellena las categorias

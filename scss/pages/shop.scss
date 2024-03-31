@@ -260,19 +260,63 @@
                 display: grid;
                 grid-template-areas: "label input";
                 justify-content: space-between;
+                > label{
+                    grid-area: label;
+                    width: 100%;
+                }
+                > input{
+                    grid-area: input;
+                    width: 15vw;
+                }
             }
-            > div > label{
-                grid-area: label;
-                width: 100%;
+            .agregarProducto {
+                width: 49%;
+                border: 0;
+                background-color: $cTexto;
+                color: $background-h1;
+                text-transform: uppercase;
+                border-radius: 2rem;
+                cursor: pointer;
+                border: solid 1px $cTexto;
+                transition: background-color .2s, color .2s;
+                &:hover {
+                    background-color: $background-h1;
+                    color: $cTexto;
+                }
             }
-            > div > input{
-                grid-area: input;
-                width: 15vw;
+            .volveraShop {
+                width: 49%;
+                border: 0;
+                background-color: $cTexto;
+                color: $background-h1;
+                text-transform: uppercase;
+                border-radius: 2rem;
+                cursor: pointer;
+                border: solid 1px $cTexto;
+                transition: background-color .2s, color .2s;
+                &:hover {
+                    background-color: $background-h1;
+                    color: $cTexto;
+                }
+                a {
+                    all: initial;
+                    width: 49%;
+                    border: 0;
+                    background-color: $cTexto;
+                    color: $background-h1;
+                    text-transform: uppercase;
+                    &:hover {
+                        background-color: $background-h1;
+                        color: $cTexto;
+                    }
+                }
             }
         }
     }
     .delete{
         margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
     }
 }
 .disabled{
