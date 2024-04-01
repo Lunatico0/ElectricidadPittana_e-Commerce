@@ -62,9 +62,35 @@
                 text-align: center;
             }
             .contenedor{
+                flex-direction: column;
                 .item{
-                    flex: 12rem;
-                    max-width: 12rem;
+                    max-width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    max-height: 20vh;
+                    .itemDetalles{
+                        margin-top: 0;
+                        display: flex;
+                        flex-direction: column;
+                        width: 50%;
+                        text-wrap: wrap;
+                        justify-content: space-between;
+                        align-items: center;
+                        border-radius: 0;
+                        border-top-right-radius: 1.5rem;
+                        border-bottom-right-radius: 1.5rem;
+                        .agregarProducto{
+                            width: 100%;
+                        }
+                    }
+                    img{
+                        width: 50%;
+                        height: 100%;
+                        border-radius: 0;
+                        border-top-left-radius: 1.5rem;
+                        border-bottom-left-radius: 1.5rem;
+                    }
                 }
             }
             .contenedorCarrito{

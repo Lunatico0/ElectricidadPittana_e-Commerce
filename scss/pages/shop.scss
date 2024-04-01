@@ -123,10 +123,15 @@
                             display: flex;
                             flex-direction: column;
                             text-align: center;
-
                         }
                         .carritoProductoTitulo{
                             width: 10vw;
+                            > h3{
+                                font-size: 20px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                max-height: 3rem;
+                            }
                         }
                         .eliminarArticulo{
                             border: 0;
@@ -269,46 +274,29 @@
                     width: 15vw;
                 }
             }
-            .agregarProducto {
-                width: 49%;
-                border: 0;
-                background-color: $cTexto;
-                color: $background-h1;
-                text-transform: uppercase;
-                border-radius: 2rem;
-                cursor: pointer;
-                border: solid 1px $cTexto;
-                transition: background-color .2s, color .2s;
-                &:hover {
-                    background-color: $background-h1;
-                    color: $cTexto;
-                }
-            }
-            .volveraShop {
-                width: 49%;
-                border: 0;
-                background-color: $cTexto;
-                color: $background-h1;
-                text-transform: uppercase;
-                border-radius: 2rem;
-                cursor: pointer;
-                border: solid 1px $cTexto;
-                transition: background-color .2s, color .2s;
-                &:hover {
-                    background-color: $background-h1;
-                    color: $cTexto;
-                }
-                a {
-                    all: initial;
+            div{
+                display: flex;
+                flex-direction: row;
+                .agregarProducto {
                     width: 49%;
                     border: 0;
                     background-color: $cTexto;
                     color: $background-h1;
                     text-transform: uppercase;
+                    border-radius: 2rem;
+                    cursor: pointer;
+                    border: solid 1px $cTexto;
+                    transition: background-color .2s, color .2s;
                     &:hover {
                         background-color: $background-h1;
                         color: $cTexto;
                     }
+                }
+                a{
+                    all: initial;
+                    text-align: center;
+                    line-height: inherit;
+                    font-family: inherit;
                 }
             }
         }

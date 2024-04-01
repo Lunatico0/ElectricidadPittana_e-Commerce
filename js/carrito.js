@@ -77,6 +77,7 @@ function botonesEliminar() {
 
 function eliminarItem(e) {
     const idBoton = e.currentTarget.id;
+    const tituloItem = carrito.find(producto => producto.id === idBoton);
     const index = carrito.findIndex(producto => producto.id === idBoton);
     if (carrito[index].cantidad > 1) {
         carrito[index].cantidad--;
@@ -85,12 +86,34 @@ function eliminarItem(e) {
     }
     cargarItems();
     localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
+    Toastify({
+        text: `Se elimino el articulo ${tituloItem.titulo}`,
+        duration: 3000,
+        gravity: "top",
+        close: true,
+        backgroundColor: "linear-gradient(18deg, rgba(122,122,122,1) 0%, rgba(83,82,82,1) 47%, rgba(42,42,42,1) 100%)",
+        style: {
+            color: "#c9c9c9",
+        }
+    }).showToast();
+    return;
 }
 
 function vaciarCarro() {
     carrito.length = 0;
     localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
     cargarItems();
+    Toastify({
+        text: `Has vaciado tu carrito`,
+        duration: 3000,
+        gravity: "top",
+        close: true,
+        backgroundColor: "linear-gradient(18deg, rgba(122,122,122,1) 0%, rgba(83,82,82,1) 47%, rgba(42,42,42,1) 100%)",
+        style: {
+            color: "#c9c9c9",
+        }
+    }).showToast();
+    return;
 }
 
 function actualizarTotal() {
@@ -106,6 +129,17 @@ function comprarCarro() {
     carritoItem.classList.add("disabled");
     carritoAcciones.classList.add("disabled");
     comprado.classList.remove("disabled");
+    Toastify({
+        text: `🎉Felicidades por tu compra. 🛒🎉`,
+        duration: 3000,
+        gravity: "top",
+        close: true,
+        backgroundColor: "linear-gradient(18deg, rgba(122,122,122,1) 0%, rgba(83,82,82,1) 47%, rgba(42,42,42,1) 100%)",
+        style: {
+            color: "#c9c9c9",
+        }
+    }).showToast();
+    return;
 }
 
 function responsive() {
