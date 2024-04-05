@@ -1,5 +1,6 @@
 const carrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
 
+//! Se seleccionan los elementos del DOM y se crean variables o constantes
 let eliminar = document.querySelectorAll(".eliminarArticulo");
 const carritoEmpty = document.querySelector("#carritoEmpty");
 const carritoItem = document.querySelector("#carritoItem");
@@ -11,11 +12,12 @@ const total = document.querySelector("#total");
 const botonFiltro = document.querySelector("#botonFiltro");
 const botonCerrar = document.querySelector("#botonCerrar");
 const mediaQuery = window.matchMedia('(max-width: 845px)');
+const carritoItems = document.querySelectorAll(".itemProducto");
 comprar.addEventListener("click", comprarCarro);
 vaciar.addEventListener("click", vaciarCarro);
 cargarItems();
-const carritoItems = document.querySelectorAll(".itemProducto");
 
+//* Muestra los items agregados al carrito
 function cargarItems() {
     responsive();
     if (carrito && carrito.length > 0) {
@@ -30,31 +32,31 @@ function cargarItems() {
         carrito.forEach(producto => {
             const div = document.createElement("div");
             const subtotal = producto.precio * producto.cantidad;
+            const htmlItem = `  <div class="imagen">
+                                    <img src="${producto.imagen}" alt="${producto.titulo}">
+                                </div>
+                                <div class="detalles">
+                                    <div class="carritoProductoTitulo">
+                                        <h4>Titulo</h4>
+                                        <h3>${producto.titulo}</h3>
+                                    </div>
+                                    <div class="carritoProductoCantidad">
+                                        <h4>Cantidad</h4>
+                                        <h3>${producto.cantidad}</h3>
+                                    </div>
+                                    <div class="carritoProductoPrecio">
+                                        <h4>Precio</h4>
+                                        <h3>$${producto.precio.toLocaleString('es-AR')}</h3>
+                                    </div>
+                                    <div class="carritoProductoSubtotal">
+                                        <h4>Subtotal</h4>
+                                        <h3>$${subtotal.toLocaleString('es-AR')}</h3>
+                                    </div>
+                                    <button class="eliminarArticulo" id="${producto.id}" ><i class="bi bi-trash3"></i></button>
+                                </div>`;
+            
             div.classList.add("itemProducto");
-            div.innerHTML = `
-                <div class="imagen">
-                    <img src="${producto.imagen}" alt="${producto.titulo}">
-                </div>
-                <div class="detalles">
-                    <div class="carritoProductoTitulo">
-                        <h4>Titulo</h4>
-                        <h3>${producto.titulo}</h3>
-                    </div>
-                    <div class="carritoProductoCantidad">
-                        <h4>Cantidad</h4>
-                        <h3>${producto.cantidad}</h3>
-                    </div>
-                    <div class="carritoProductoPrecio">
-                        <h4>Precio</h4>
-                        <h3>$${producto.precio.toLocaleString('es-AR')}</h3>
-                    </div>
-                    <div class="carritoProductoSubtotal">
-                        <h4>Subtotal</h4>
-                        <h3>$${subtotal.toLocaleString('es-AR')}</h3>
-                    </div>
-                    <button class="eliminarArticulo" id="${producto.id}" ><i class="bi bi-trash3"></i></button>
-                </div>
-            `;
+            div.innerHTML = htmlItem;
             carritoItem.append(div);
         });
 
@@ -66,82 +68,66 @@ function cargarItems() {
     }
     botonesEliminar();
     actualizarTotal();
-}
+    if (mediaQuery.matches) {
+        cambiarImagenBackground();
+    } else {
+        removeBackgroundImage();
+    }
+};
 
+//* Lector de evento de los botones "Eliminar producto"
 function botonesEliminar() {
     eliminar = document.querySelectorAll(".eliminarArticulo");
-    eliminar.forEach(boton => {
-        boton.addEventListener("click", eliminarItem)
-    });
-}
+    eliminar.forEach(boton => { boton.addEventListener("click", eliminarItem) });
+};
 
+//* Disminuir la cantidad o eliminar articulo + Toastify
 function eliminarItem(e) {
     const idBoton = e.currentTarget.id;
     const tituloItem = carrito.find(producto => producto.id === idBoton);
     const index = carrito.findIndex(producto => producto.id === idBoton);
-    if (carrito[index].cantidad > 1) {
-        carrito[index].cantidad--;
-    } else {
-        carrito.splice(index, 1);
-    }
+    const toastTituloItem = `Se elimino el articulo ${tituloItem.titulo}`;
+
+    //// if (carrito[index].cantidad > 1) { carrito[index].cantidad--;
+    //// } else { carrito.splice(index, 1);}; 
+
+    // ☝️Cambie la funcion if de arriba por el ternario de abajo👇
+
+    carrito[index].cantidad > 1 ? carrito[index].cantidad-- : carrito.splice(index, 1);
+
     cargarItems();
     localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
-    Toastify({
-        text: `Se elimino el articulo ${tituloItem.titulo}`,
-        duration: 3000,
-        gravity: "top",
-        close: true,
-        backgroundColor: "linear-gradient(18deg, rgba(122,122,122,1) 0%, rgba(83,82,82,1) 47%, rgba(42,42,42,1) 100%)",
-        style: {
-            color: "#c9c9c9",
-        }
-    }).showToast();
-    return;
-}
+    toastify(toastTituloItem);
+};
 
+//* Eliminar todos los items del carrito + Toastify
 function vaciarCarro() {
+    const toastCarritoVacciado = "Has vaciado tu carrito";
     carrito.length = 0;
     localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
     cargarItems();
-    Toastify({
-        text: `Has vaciado tu carrito`,
-        duration: 3000,
-        gravity: "top",
-        close: true,
-        backgroundColor: "linear-gradient(18deg, rgba(122,122,122,1) 0%, rgba(83,82,82,1) 47%, rgba(42,42,42,1) 100%)",
-        style: {
-            color: "#c9c9c9",
-        }
-    }).showToast();
-    return;
-}
+    toastify(toastCarritoVacciado);
+};
 
+//* Muestra el total a pagar del carrito completo
 function actualizarTotal() {
     const totalCalculado = carrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0);
     total.innerText = `$${totalCalculado.toLocaleString('es-AR')}`;
-}
+};
 
+//* Comprar todos los items del carrito + Toastify
 function comprarCarro() {
+    const toastCarritoComprado = `🎉Felicidades por tu compra. 🛒🎉`;
     carrito.length = 0;
     localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
-
     carritoEmpty.classList.add("disabled");
     carritoItem.classList.add("disabled");
     carritoAcciones.classList.add("disabled");
     comprado.classList.remove("disabled");
-    Toastify({
-        text: `🎉Felicidades por tu compra. 🛒🎉`,
-        duration: 3000,
-        gravity: "top",
-        close: true,
-        backgroundColor: "linear-gradient(18deg, rgba(122,122,122,1) 0%, rgba(83,82,82,1) 47%, rgba(42,42,42,1) 100%)",
-        style: {
-            color: "#c9c9c9",
-        }
-    }).showToast();
-    return;
-}
+    toastify(toastCarritoComprado);
+};
 
+//* Agrega o quita segun el caso la clase "filtroMobile" para el responsive
 function responsive() {
     botonFiltro.addEventListener("click", () => {
         const aside = document.querySelector(".filtros");
@@ -153,49 +139,66 @@ function responsive() {
         aside.classList.remove("filtroMobile");
         botonFiltro.classList.remove("disabled");
     })
-}
-
-function cambiarImagenBackground() {
-    carritoItems.forEach((item, index) => {
-        const productoActual = carrito[index];
-        const div = item.querySelector(".detalles")
-        const divImagen = item.querySelector('.imagen');
-        const imagen = item.querySelector('.imagen img');
-        imagen.classList.add('disabled');
-        divImagen.classList.add('disabled');
-        div.style.backgroundImage = `url(${productoActual.imagen})`;
-    });
 };
 
+//* Al visualizarlo desde mobile la imagen de cada item se pone como "background" de cada "div .detalles"
+function cambiarImagenBackground() {
+    const hijosCarritoItem = carritoItem.children;
+    for (let i = 0; i < hijosCarritoItem.length; i++) {
+        const elementoHijo = hijosCarritoItem[i];
+        const div = elementoHijo.querySelector(".detalles");
+        const divImagen = elementoHijo.querySelector('.imagen');
+        const imagen = elementoHijo.querySelector('.imagen img');
+        imagen.classList.add('disabled');
+        divImagen.classList.add('disabled');
+        const idDiv = elementoHijo.querySelector(".eliminarArticulo")
+        const idProducto = idDiv.id;
+        const productoActual = carrito.find(producto => producto.id === idProducto);
+        div.style.backgroundImage = `url(${productoActual.imagen})`;
+    }
+}
 
+//* Lector de evento de cando cambia el tamaño del viewPort
 mediaQuery.addEventListener('change', (event) => {
     if (mediaQuery.matches) {
         cambiarImagenBackground();
-    }else if (!mediaQuery.matches){
-        carritoItems.forEach((item, index) => {
-            const productoActual = carrito[index];
-            const div = item.querySelector(".detalles")
-            const imagen = item.querySelector(".imagen img");
-            const divImagen = item.querySelector('.imagen');
-            divImagen.classList.remove('disabled');
-            imagen.classList.remove("disabled");
-            div.classList.remove("disabled");
-            div.style.backgroundImage = "none";
-        });
+    } else {
+        removeBackgroundImage();
     }
 });
 
-if (mediaQuery.matches) {
-    cambiarImagenBackground();
-} else if (!mediaQuery.matches){
-    carritoItems.forEach((item, index) => {
-        const productoActual = carrito[index];
-        const div = item.querySelector(".detalles")
-        const imagen = item.querySelector(".imagen img");
-        const divImagen = item.querySelector('.imagen');
+//* Devuelve todo a su sitio al visualizarlo desde la vista de escritorio
+function removeBackgroundImage() {
+    const hijosCarritoItem = carritoItem.children;
+    for (let i = 0; i < hijosCarritoItem.length; i++) {
+        const elementoHijo = hijosCarritoItem[i];
+        const div = elementoHijo.querySelector(".detalles");
+        const divImagen = elementoHijo.querySelector('.imagen');
+        const imagen = elementoHijo.querySelector('.imagen img');
+        imagen.classList.remove('disabled');
         divImagen.classList.remove('disabled');
-        imagen.classList.remove("disabled");
         div.classList.remove("disabled");
         div.style.backgroundImage = "none";
-    });
-}
+        const idDiv = elementoHijo.querySelector(".eliminarArticulo")
+        const idProducto = idDiv.id;
+        const productoActual = carrito.find(producto => producto.id === idProducto);
+        divImagen.innerHTML = `<img src="${productoActual.imagen}" alt="${productoActual.titulo}">`
+    }
+};
+
+//* Muestra toastify cuando llamas a la funcion dandole como parametro el mensaje
+function toastify(titulo){
+    Toastify({
+        text: titulo,
+        duration: 3000,
+        gravity: "top",
+        close: true,
+        style: {
+            background: "linear-gradient(to left, #333, #111",
+            color: "white",
+            borderRadius: "1rem",
+            border: "solid, 2px, #f3f3f3",
+        }
+    }).showToast();
+    return;
+};

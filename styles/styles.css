@@ -528,6 +528,7 @@ main div .row div form div button a:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 3rem;
+  text-wrap: balance;
 }
 .content .contenido .contenedorCarrito .carritoItem .itemProducto .detalles .eliminarArticulo {
   border: 0;

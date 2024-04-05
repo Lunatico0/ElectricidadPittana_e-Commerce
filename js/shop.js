@@ -72,15 +72,19 @@ let productos = [
     },
 ];
 
-// Se actualiza el localStorage con los productos
-if(!localStorage.getItem("productos")){
-    localStorage.setItem("productos", JSON.stringify(productos));
-}
+//* Se actualiza el localStorage con los productos
+// // if(!localStorage.getItem("productos")){
+// //     localStorage.setItem("productos", JSON.stringify(productos));
+// // }
 
-// Se comprueba si existen productos en el localStorage, de lo contrario se inicializa con un array vacío
+//? ☝️Cambie la funcion if de arriba por el operador logico AND👇
+
+!localStorage.getItem("productos") && localStorage.setItem("productos", JSON.stringify(productos));
+
+//* Se comprueba si existen productos en el localStorage, de lo contrario se inicializa con un array vacío
 productos = JSON.parse(localStorage.getItem("productos")) || [];
 
-// Se seleccionan los elementos del DOM
+//! Se seleccionan los elementos del DOM y se crean variables o constantes
 const contenedorProductos = document.querySelector("#productos");
 const filtros = document.querySelector("#filtros");
 const tituloPrincipal = document.querySelector("#tituloPrincipal");
@@ -90,33 +94,40 @@ const productosBajadoLS = JSON.parse(localStorage.getItem("productos")) || [];
 const botonFiltro = document.querySelector("#botonFiltro");
 const botonCerrar = document.querySelector("#botonCerrar");
 const aside = document.querySelector(".filtros");
+const numerito = document.querySelector("#contCarrito");
 let agregarCarrito = document.querySelectorAll(".agregarProducto");
 let carrito;
 let ids = [];
 let nombres = [];
 
-productos.forEach(producto => {
-    if (!ids.includes(producto.categoria.id)) {
-        ids.push(producto.categoria.id);
-    }
-    if (!nombres.includes(producto.categoria.nombre)) {
-        nombres.push(producto.categoria.nombre);
-    }
-});
+categoriaIds();
+cargarProductos(productos);
 
+//* Actualiza los Id´s del array
+function categoriaIds(){
+    productos.forEach(producto => {
+        if (!ids.includes(producto.categoria.id)) {
+            ids.push(producto.categoria.id);
+        }
+        if (!nombres.includes(producto.categoria.nombre)) {
+            nombres.push(producto.categoria.nombre);
+        }
+    });
+};
+
+//* Agrega cada categoria en la seccion filtros
 for(let i = 0; i < ids.length; i++){
     const li = document.createElement("li");
-    li.innerHTML = `
-    <button aria-valuetext="${nombres[i]}" id="${ids[i]}" class="btnShop botonCategoria">${nombres[i]}</button>
-    `
+    const categoriaHTML = `<button aria-valuetext="${nombres[i]}" id="${ids[i]}" class="btnShop botonCategoria">${nombres[i]}</button>`;
+    li.innerHTML = categoriaHTML;
     filtros.appendChild(li);
 }
 
+//! Se seleccionan los elementos del DOM que se crearon dinamicamente
 const categorias = document.querySelectorAll(".botonCategoria");
 const liCarrito = document.createElement("li");
 
-const numerito = document.querySelector("#contCarrito");
-
+//* Si hay informacion en el LocalStorae de carrito actualiza el numero o lo deja en 0
 if(carritoLS){
     carrito = JSON.parse(carritoLS);
     actualizarNumerito();
@@ -124,29 +135,27 @@ if(carritoLS){
     carrito = [];
 }
 
-//muestra los productos segun la categoria
+//* Muestra los productos segun la categoria
 function cargarProductos(select){
     productos = JSON.parse(localStorage.getItem("productos")) || [];
     responsive();
     contenedorProductos.innerHTML = "";
     select.forEach(producto => {
         const div = document.createElement("div");
+        const itemHTML = `  <img src="${producto.imagen}" alt="${producto.titulo}">
+                            <div class="itemDetalles">
+                                <h3 class="itemTitulo"> ${producto.titulo} </h3>
+                                <p class="itemPrecio"> $${producto.precio.toLocaleString('es-AR')} </p>
+                                <button class="agregarProducto" id="${producto.id}">agregar</button>
+                            </div>`;
         div.classList.add("item")
-        div.innerHTML = `
-            <img src="${producto.imagen}" alt="${producto.titulo}">
-            <div class="itemDetalles">
-                <h3 class="itemTitulo"> ${producto.titulo} </h3>
-                <p class="itemPrecio"> $${producto.precio.toLocaleString('es-AR')} </p>
-                <button class="agregarProducto" id="${producto.id}">agregar</button>
-            </div>
-        `
+        div.innerHTML = itemHTML;
         contenedorProductos.append(div);
     })
     actualizarAgregarCarrito();
 };
 
-cargarProductos(productos);
-
+//* Muestra los productos segun la categgoria seleccionada
 categorias.forEach( boton => {
     boton.addEventListener("click", (e) => {
 
@@ -172,14 +181,15 @@ categorias.forEach( boton => {
     })
 });
 
+//* Lector de evento de los botones "agregar al carrito"
 function actualizarAgregarCarrito(){
     agregarCarrito = document.querySelectorAll(".agregarProducto");
-    
     agregarCarrito.forEach(boton => {
         boton.addEventListener("click", agregarAlCarrito)
     });
 }
 
+//* Actualiza el array y el LocalStorage de productos agreggados al carrito
 function agregarAlCarrito(e){
     const idBoton = e.currentTarget.id;
     const item = productos.find(producto => producto.id === idBoton);
@@ -196,21 +206,13 @@ function agregarAlCarrito(e){
     toastify(item);
 };
 
+//* Actualiza el contador visible de produsctos en el carrito
 function actualizarNumerito(){
     let nuevoNumerito = carrito.reduce((acc, producto) => acc + producto.cantidad, 0);
     numerito.innerText = nuevoNumerito;
 };
 
-function obtenerIds(){
-    const id = [];
-    productos.forEach(producto => {
-        if (!id.includes(producto.id)) {
-            id.push(producto.id);
-        }
-    });
-    return id;
-}
-
+//* Agrega o quita segun el caso la clase "filtroMobile" para el responsive
 function responsive(){
     botonFiltro.addEventListener("click", () => {
         aside.classList.add("filtroMobile");
@@ -222,15 +224,18 @@ function responsive(){
     })
 };
 
+//* Muestra toastify cuando agregas un producto al carrito
 function toastify(item){
     Toastify({
         text: `Se agrego el articulo ${item.titulo} a tu carrito`,
         duration: 3000,
         gravity: "top",
         close: true,
-        backgroundColor: "linear-gradient(18deg, rgba(122,122,122,1) 0%, rgba(83,82,82,1) 47%, rgba(42,42,42,1) 100%)",
         style: {
-            color: "#c9c9c9",
+            background: "linear-gradient(to left, #333, #111",
+            color: "white",
+            borderRadius: "1rem",
+            border: "solid, 2px, #f3f3f3",
         }
     }).showToast();
     return;
