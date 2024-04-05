@@ -143,18 +143,20 @@ function responsive() {
 
 //* Al visualizarlo desde mobile la imagen de cada item se pone como "background" de cada "div .detalles"
 function cambiarImagenBackground() {
-    const hijosCarritoItem = carritoItem.children;
-    for (let i = 0; i < hijosCarritoItem.length; i++) {
-        const elementoHijo = hijosCarritoItem[i];
-        const div = elementoHijo.querySelector(".detalles");
-        const divImagen = elementoHijo.querySelector('.imagen');
-        const imagen = elementoHijo.querySelector('.imagen img');
-        imagen.classList.add('disabled');
-        divImagen.classList.add('disabled');
-        const idDiv = elementoHijo.querySelector(".eliminarArticulo")
-        const idProducto = idDiv.id;
-        const productoActual = carrito.find(producto => producto.id === idProducto);
-        div.style.backgroundImage = `url(${productoActual.imagen})`;
+    if (carrito && carrito.length > 0){
+        const hijosCarritoItem = carritoItem.children;
+        for (let i = 0; i < hijosCarritoItem.length; i++) {
+            const elementoHijo = hijosCarritoItem[i];
+            const div = elementoHijo.querySelector(".detalles");
+            const divImagen = elementoHijo.querySelector('.imagen');
+            const imagen = elementoHijo.querySelector('.imagen img');
+            imagen.classList.add('disabled');
+            divImagen.classList.add('disabled');
+            const idDiv = elementoHijo.querySelector(".eliminarArticulo")
+            const idProducto = idDiv.id;
+            const productoActual = carrito.find(producto => producto.id === idProducto);
+            div.style.backgroundImage = `url(${productoActual.imagen})`;
+        }
     }
 }
 
@@ -169,20 +171,22 @@ mediaQuery.addEventListener('change', (event) => {
 
 //* Devuelve todo a su sitio al visualizarlo desde la vista de escritorio
 function removeBackgroundImage() {
-    const hijosCarritoItem = carritoItem.children;
-    for (let i = 0; i < hijosCarritoItem.length; i++) {
-        const elementoHijo = hijosCarritoItem[i];
-        const div = elementoHijo.querySelector(".detalles");
-        const divImagen = elementoHijo.querySelector('.imagen');
-        const imagen = elementoHijo.querySelector('.imagen img');
-        imagen.classList.remove('disabled');
-        divImagen.classList.remove('disabled');
-        div.classList.remove("disabled");
-        div.style.backgroundImage = "none";
-        const idDiv = elementoHijo.querySelector(".eliminarArticulo")
-        const idProducto = idDiv.id;
-        const productoActual = carrito.find(producto => producto.id === idProducto);
-        divImagen.innerHTML = `<img src="${productoActual.imagen}" alt="${productoActual.titulo}">`
+    if (carrito && carrito.length > 0){
+        const hijosCarritoItem = carritoItem.children;
+        for (let i = 0; i < hijosCarritoItem.length; i++) {
+            const elementoHijo = hijosCarritoItem[i];
+            const div = elementoHijo.querySelector(".detalles");
+            const divImagen = elementoHijo.querySelector('.imagen');
+            const imagen = elementoHijo.querySelector('.imagen img');
+            imagen.classList.remove('disabled');
+            divImagen.classList.remove('disabled');
+            div.classList.remove("disabled");
+            div.style.backgroundImage = "none";
+            const idDiv = elementoHijo.querySelector(".eliminarArticulo")
+            const idProducto = idDiv.id;
+            const productoActual = carrito.find(producto => producto.id === idProducto);
+            divImagen.innerHTML = `<img src="${productoActual.imagen}" alt="${productoActual.titulo}">`
+        }
     }
 };
 
