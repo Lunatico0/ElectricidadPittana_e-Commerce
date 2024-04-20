@@ -1,4 +1,4 @@
-// productos para inicializar el localStorage
+// #region arrayPrincipal
 let productos = [
     {
         id: "polea",
@@ -72,13 +72,7 @@ let productos = [
     },
 ];
 
-//* Se actualiza el localStorage con los productos
-// // if(!localStorage.getItem("productos")){
-// //     localStorage.setItem("productos", JSON.stringify(productos));
-// // }
-
-//? ☝️Cambie la funcion if de arriba por el operador logico AND👇
-
+// #region LocalStorage y declaraciones
 !localStorage.getItem("productos") && localStorage.setItem("productos", JSON.stringify(productos));
 
 //* Se comprueba si existen productos en el localStorage, de lo contrario se inicializa con un array vacío
@@ -100,10 +94,21 @@ let carrito;
 let ids = [];
 let nombres = [];
 
+// fetch("../data/productos.json")
+//     .then((res) => res.json())
+//     .then((data) => {
+//         productos = [...data];
+//         !localStorage.getItem("productos") && localStorage.setItem("productos", JSON.stringify(productos));
+//         cargarProductos(productos);
+//         categoriaIds();
+//         categoriasIDs();
+//     });
+
+
 categoriaIds();
 cargarProductos(productos);
 
-//* Actualiza los Id´s del array
+// #region Categorias y Filtros
 function categoriaIds(){
     productos.forEach(producto => {
         if (!ids.includes(producto.categoria.id)) {
@@ -194,16 +199,35 @@ function agregarAlCarrito(e){
     const idBoton = e.currentTarget.id;
     const item = productos.find(producto => producto.id === idBoton);
     const productoAgregado = productos.find(producto => producto.id === idBoton);
-    if(carrito.some(producto => producto.id === idBoton)){
-        const index = carrito.findIndex(producto => producto.id === idBoton);
-        carrito[index].cantidad ++;
-    } else {
-        productoAgregado.cantidad = 1;
-        carrito.push(productoAgregado);
-    }
-    actualizarNumerito();
-    localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
-    toastify(item);
+    Swal.fire({
+        title: "Electricidad Pittana",
+        text: `Quieres agregar ${item.titulo} al carrito`,
+        icon: "question",
+        showCancelButton: "true",
+        showCloseButton: "true",
+        cancelButtonText: "Deshacer",
+        confirmButtonText: "Agregar y seguir comprando.",
+
+        customClass: {
+            popup: 'sweet',
+            title: 'tituloG',
+            confirmButton: 'btnSweet',
+            cancelButton: 'btnSweet',
+        },
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if(carrito.some(producto => producto.id === idBoton)){
+                const index = carrito.findIndex(producto => producto.id === idBoton);
+                carrito[index].cantidad ++;
+            } else {
+                productoAgregado.cantidad = 1;
+                carrito.push(productoAgregado);
+            }
+            actualizarNumerito();
+            localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
+            toastify(item);
+        }
+    });
 };
 
 //* Actualiza el contador visible de produsctos en el carrito

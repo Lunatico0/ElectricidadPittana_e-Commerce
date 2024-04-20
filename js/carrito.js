@@ -1,5 +1,6 @@
 const carrito = JSON.parse(localStorage.getItem("productosEnCarrito")) || [];
 
+// #region localStorage y declaraciones
 //! Se seleccionan los elementos del DOM y se crean variables o constantes
 let eliminar = document.querySelectorAll(".eliminarArticulo");
 const carritoEmpty = document.querySelector("#carritoEmpty");
@@ -13,6 +14,7 @@ const botonFiltro = document.querySelector("#botonFiltro");
 const botonCerrar = document.querySelector("#botonCerrar");
 const mediaQuery = window.matchMedia('(max-width: 845px)');
 const carritoItems = document.querySelectorAll(".itemProducto");
+
 comprar.addEventListener("click", comprarCarro);
 vaciar.addEventListener("click", vaciarCarro);
 cargarItems();
@@ -88,11 +90,6 @@ function eliminarItem(e) {
     const index = carrito.findIndex(producto => producto.id === idBoton);
     const toastTituloItem = `Se elimino el articulo ${tituloItem.titulo}`;
 
-    //// if (carrito[index].cantidad > 1) { carrito[index].cantidad--;
-    //// } else { carrito.splice(index, 1);}; 
-
-    // ☝️Cambie la funcion if de arriba por el ternario de abajo👇
-
     carrito[index].cantidad > 1 ? carrito[index].cantidad-- : carrito.splice(index, 1);
 
     cargarItems();
@@ -102,11 +99,43 @@ function eliminarItem(e) {
 
 //* Eliminar todos los items del carrito + Toastify
 function vaciarCarro() {
-    const toastCarritoVacciado = "Has vaciado tu carrito";
-    carrito.length = 0;
-    localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
-    cargarItems();
-    toastify(toastCarritoVacciado);
+    const toastCarritoVaciado = "Has vaciado tu carrito";
+    Swal.fire({
+        title: "Electricidad Pittana",
+        text: "Quieres eliminar " + carrito.length + " articulos?",
+        icon: "question",
+        showCancelButton: "true",
+        showCloseButton: "true",
+        cancelButtonText: "Deshacer",
+        confirmButtonText: "Confirmar",
+        customClass: {
+            popup: 'sweet',
+            title: 'tituloG',
+            confirmButton: 'btnSweet',
+            cancelButton: 'btnSweet',
+        },
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Electricidad Pittana",
+                text: toastCarritoVaciado,
+                showCloseButton: "true",
+                icon: "success",
+                customClass: {
+                    popup: 'sweet',
+                    title: 'tituloG',
+                    confirmButton: 'btnSweet',
+                    cancelButton: 'btnSweet',
+                },
+            });
+            carrito.length = 0;
+            localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
+            toastify(toastCarritoVaciado);
+            cargarItems();
+        } else {
+            cargarItems();
+        }
+    });
 };
 
 //* Muestra el total a pagar del carrito completo
@@ -118,15 +147,49 @@ function actualizarTotal() {
 //* Comprar todos los items del carrito + Toastify
 function comprarCarro() {
     const toastCarritoComprado = `🎉Felicidades por tu compra. 🛒🎉`;
-    carrito.length = 0;
-    localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
-    carritoEmpty.classList.add("disabled");
-    carritoItem.classList.add("disabled");
-    carritoAcciones.classList.add("disabled");
-    comprado.classList.remove("disabled");
-    toastify(toastCarritoComprado);
+
+    Swal.fire({
+        title: "Electricidad Pittana",
+        text: "Confirmar compra de " + carrito.length + " articulos?",
+        icon: "question",
+        showCancelButton: "true",
+        showCloseButton: "true",
+        cancelButtonText: "Deshacer",
+        confirmButtonText: "Confirmar",
+        customClass: {
+            popup: 'sweet',
+            title: 'tituloG',
+            confirmButton: 'btnSweet',
+            cancelButton: 'btnSweet',
+        },
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Electricidad Pittana",
+                text: toastCarritoComprado,
+                showCloseButton: "true",
+                icon: "success",
+                customClass: {
+                    popup: 'sweet',
+                    title: 'tituloG',
+                    confirmButton: 'btnSweet',
+                    cancelButton: 'btnSweet',
+                },
+            });
+            carritoEmpty.classList.add("disabled");
+            carritoItem.classList.add("disabled");
+            carritoAcciones.classList.add("disabled");
+            comprado.classList.remove("disabled");
+            carrito.length = 0;
+            localStorage.setItem("productosEnCarrito", JSON.stringify(carrito));
+            toastify(toastCarritoComprado);
+        } else {
+            cargarItems();
+        }
+    });
 };
 
+// #region Responsive y toastify
 //* Agrega o quita segun el caso la clase "filtroMobile" para el responsive
 function responsive() {
     botonFiltro.addEventListener("click", () => {

@@ -1,0 +1,142 @@
+[
+    {
+        "id": "polea",
+        "titulo": "Polea",
+        "imagen": "../media/shop/polea_alt.png",
+        "categoria": {
+            "nombre": "Alternadores",
+            "id": "alternadores"
+        },
+        "precio": 47252
+    },
+    {
+        "id": "rotor",
+        "titulo": "Rotor",
+        "imagen": "../media/shop/rotor_alt.png",
+        "categoria": {
+            "nombre": "Alternadores",
+            "id": "alternadores"
+        },
+        "precio": 89558
+    },
+    {
+        "id": "estator",
+        "titulo": "Estator",
+        "imagen": "../media/shop/estator_alt.png",
+        "categoria": {
+            "nombre": "Alternadores",
+            "id": "alternadores"
+        },
+        "precio": 47944
+    },
+    {
+        "id": "arranque-nuevo",
+        "titulo": "Arranque Nuevo",
+        "imagen": "../media/img/productos_arranque.png",
+        "categoria": {
+            "nombre": "Arranques",
+            "id": "arranques"
+        },
+        "precio": 168750
+    },
+    {
+        "id": "impulsor",
+        "titulo": "Impulsor",
+        "imagen": "../media/shop/impulsor_arr.png",
+        "categoria": {
+            "nombre": "Arranques",
+            "id": "arranques"
+        },
+        "precio": 23031
+    },
+    {
+        "id": "solenoide",
+        "titulo": "Solenoide",
+        "imagen": "../media/shop/solenoide_arr.png",
+        "categoria": {
+            "nombre": "Arranques",
+            "id": "arranques"
+        },
+        "precio": 36995
+    },
+    {
+        "id": "campos",
+        "titulo": "Campos",
+        "imagen": "../media/shop/campos_arr.png",
+        "categoria": {
+            "nombre": "Arranques",
+            "id": "arranques"
+        },
+        "precio": 44765
+    },
+    {
+        "id": "polea",
+        "titulo": "Polea",
+        "imagen": "../media/shop/polea_alt.png",
+        "categoria": {
+            "nombre": "Alternadores",
+            "id": "alternadores"
+        },
+        "precio": 47252
+    },
+    {
+        "id": "rotor",
+        "titulo": "Rotor",
+        "imagen": "../media/shop/rotor_alt.png",
+        "categoria": {
+            "nombre": "Alternadores",
+            "id": "alternadores"
+        },
+        "precio": 89558
+    },
+    {
+        "id": "estator",
+        "titulo": "Estator",
+        "imagen": "../media/shop/estator_alt.png",
+        "categoria": {
+            "nombre": "Alternadores",
+            "id": "alternadores"
+        },
+        "precio": 47944
+    },
+    {
+        "id": "arranque-nuevo",
+        "titulo": "Arranque Nuevo",
+        "imagen": "../media/img/productos_arranque.png",
+        "categoria": {
+            "nombre": "Arranques",
+            "id": "arranques"
+        },
+        "precio": 168750
+    },
+    {
+        "id": "impulsor",
+        "titulo": "Impulsor",
+        "imagen": "../media/shop/impulsor_arr.png",
+        "categoria": {
+            "nombre": "Arranques",
+            "id": "arranques"
+        },
+        "precio": 23031
+    },
+    {
+        "id": "solenoide",
+        "titulo": "Solenoide",
+        "imagen": "../media/shop/solenoide_arr.png",
+        "categoria": {
+            "nombre": "Arranques",
+            "id": "arranques"
+        },
+        "precio": 36995
+    },
+    {
+        "id": "campos",
+        "titulo": "Campos",
+        "imagen": "../media/shop/campos_arr.png",
+        "categoria": {
+            "nombre": "Arranques",
+            "id": "arranques"
+        },
+        "precio": 44765
+    }
+]
