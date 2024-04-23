@@ -1,90 +1,13 @@
-// #region arrayPrincipal
-let productos = [
-    {
-        id: "polea",
-        titulo: "Polea",
-        imagen: "../media/shop/polea_alt.png",
-        categoria: {
-            nombre: "Alternadores",
-            id: "alternadores"
-        },
-        precio: 47252
-    },
-    {
-        id: "rotor",
-        titulo: "Rotor",
-        imagen: "../media/shop/rotor_alt.png",
-        categoria: {
-            nombre: "Alternadores",
-            id: "alternadores"
-        },
-        precio: 89558
-    },
-    {
-        id: "estator",
-        titulo: "Estator",
-        imagen: "../media/shop/estator_alt.png",
-        categoria: {
-            nombre: "Alternadores",
-            id: "alternadores"
-        },
-        precio: 47944
-    },
-    {
-        id: "arranque-nuevo",
-        titulo: "Arranque Nuevo",
-        imagen: "../media/img/productos_arranque.png",
-        categoria: {
-            nombre: "Arranques",
-            id: "arranques"
-        },
-        precio: 168750
-    },
-    {
-        id: "impulsor",
-        titulo: "Impulsor",
-        imagen: "../media/shop/impulsor_arr.png",
-        categoria: {
-            nombre: "Arranques",
-            id: "arranques"
-        },
-        precio: 23031
-    },
-    {
-        id: "solenoide",
-        titulo: "Solenoide",
-        imagen: "../media/shop/solenoide_arr.png",
-        categoria: {
-            nombre: "Arranques",
-            id: "arranques"
-        },
-        precio: 36995
-    },
-    {
-        id: "campos",
-        titulo: "Campos",
-        imagen: "../media/shop/campos_arr.png",
-        categoria: {
-            nombre: "Arranques",
-            id: "arranques"
-        },
-        precio: 44765
-    },
-];
-
 // #region LocalStorage y declaraciones
-!localStorage.getItem("productos") && localStorage.setItem("productos", JSON.stringify(productos));
+const carritoLS = localStorage.getItem("productosEnCarrito");
+const productosBajadoLS = JSON.parse(localStorage.getItem("productos")) || [];
 
-//* Se comprueba si existen productos en el localStorage, de lo contrario se inicializa con un array vacío
-productos = JSON.parse(localStorage.getItem("productos")) || [];
 
-//! Se seleccionan los elementos del DOM y se crean variables o constantes
+//! Seleccionamos los elementos del DOM y se crean variables o constantes
 const contenedorProductos = document.querySelector("#productos");
 const filtros = document.querySelector("#filtros");
 const tituloPrincipal = document.querySelector("#tituloPrincipal");
 const tituloFiltros = document.querySelector("#tituloFiltros");
-const carritoLS = localStorage.getItem("productosEnCarrito");
-const productosBajadoLS = JSON.parse(localStorage.getItem("productos")) || [];
 const botonFiltro = document.querySelector("#botonFiltro");
 const botonCerrar = document.querySelector("#botonCerrar");
 const aside = document.querySelector(".filtros");
@@ -94,19 +17,42 @@ let carrito;
 let ids = [];
 let nombres = [];
 
-// fetch("../data/productos.json")
-//     .then((res) => res.json())
-//     .then((data) => {
-//         productos = [...data];
-//         !localStorage.getItem("productos") && localStorage.setItem("productos", JSON.stringify(productos));
-//         cargarProductos(productos);
-//         categoriaIds();
-//         categoriasIDs();
-//     });
-
-
-categoriaIds();
-cargarProductos(productos);
+fetch("../data/productos.json")
+    .then((res) => res.json())
+    .then((data) => {
+        // No reasignamos productos aquí
+        !localStorage.getItem("productos") && localStorage.setItem("productos", JSON.stringify(data));
+        cargarProductos(data); // Solo llamamos a cargarProductos con los datos obtenidos del fetch
+        categoriaIds();
+    })
+    .then(() => {
+        // Una vez que los elementos del DOM han sido creados dinámicamente, podemos acceder a ellos
+        const categorias = document.querySelectorAll(".botonCategoria");
+        categorias.forEach( boton => {
+            boton.addEventListener("click", (e) => {
+        
+                categorias.forEach( boton => boton.classList.remove("current"));
+                
+                e.currentTarget.classList.add("current");
+                aside.classList.remove("filtroMobile");
+                botonFiltro.classList.remove("disabled");
+        
+                if(e.currentTarget.id != "todos"){
+                    const findProductos = productos.find(producto => producto.categoria.id === e.currentTarget.id);
+                    tituloPrincipal.innerText = boton.ariaValueText;
+                    tituloFiltros.innerText = boton.ariaValueText;
+        
+                    const filtroProductos = productos.filter(producto => producto.categoria.id === e.currentTarget.id);
+                    cargarProductos(filtroProductos);
+                    
+                } else {
+                    tituloFiltros.innerText = "Todos los Productos";
+                    tituloPrincipal.innerText = "Todos los Productos";
+                    cargarProductos(productos);
+                }
+            })
+        });
+    });
 
 // #region Categorias y Filtros
 function categoriaIds(){
@@ -118,19 +64,15 @@ function categoriaIds(){
             nombres.push(producto.categoria.nombre);
         }
     });
-};
 
-//* Agrega cada categoria en la seccion filtros
-for(let i = 0; i < ids.length; i++){
-    const li = document.createElement("li");
-    const categoriaHTML = `<button aria-valuetext="${nombres[i]}" id="${ids[i]}" class="btnShop botonCategoria">${nombres[i]}</button>`;
-    li.innerHTML = categoriaHTML;
-    filtros.appendChild(li);
+    // Crear elementos de categoría
+    for(let i = 0; i < ids.length; i++){
+        const li = document.createElement("li");
+        const categoriaHTML = `<button aria-valuetext="${nombres[i]}" id="${ids[i]}" class="btnShop botonCategoria">${nombres[i]}</button>`;
+        li.innerHTML = categoriaHTML;
+        filtros.appendChild(li);
+    }
 }
-
-//! Se seleccionan los elementos del DOM que se crearon dinamicamente
-const categorias = document.querySelectorAll(".botonCategoria");
-const liCarrito = document.createElement("li");
 
 //* Si hay informacion en el LocalStorae de carrito actualiza el numero o lo deja en 0
 if(carritoLS){
@@ -159,32 +101,6 @@ function cargarProductos(select){
     })
     actualizarAgregarCarrito();
 };
-
-//* Muestra los productos segun la categgoria seleccionada
-categorias.forEach( boton => {
-    boton.addEventListener("click", (e) => {
-
-        categorias.forEach( boton => boton.classList.remove("current"));
-        
-        e.currentTarget.classList.add("current");
-        aside.classList.remove("filtroMobile");
-        botonFiltro.classList.remove("disabled");
-
-        if(e.currentTarget.id != "todos"){
-            const findProductos = productos.find(producto => producto.categoria.id === e.currentTarget.id);
-            tituloPrincipal.innerText = boton.ariaValueText;
-            tituloFiltros.innerText = boton.ariaValueText;
-
-            const filtroProductos = productos.filter(producto => producto.categoria.id === e.currentTarget.id);
-            cargarProductos(filtroProductos);
-            
-        } else {
-            tituloFiltros.innerText = "Todos los Productos";
-            tituloPrincipal.innerText = "Todos los Productos";
-            cargarProductos(productos);
-        }
-    })
-});
 
 //* Lector de evento de los botones "agregar al carrito"
 function actualizarAgregarCarrito(){
