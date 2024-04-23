@@ -1,6 +1,16 @@
 // #region LocalStorage y declaraciones
 const carritoLS = localStorage.getItem("productosEnCarrito");
 const productosBajadoLS = JSON.parse(localStorage.getItem("productos")) || [];
+const nuevosDatosJSON = JSON.stringify(productosBajadoLS);
+const blob = new Blob([nuevosDatosJSON], { type: "application/json" });
+const url = URL.createObjectURL(blob);
+const enlaceDescarga = document.createElement("a");
+enlaceDescarga.href = url;
+enlaceDescarga.download = "productos_actualizados.json";
+enlaceDescarga.innerHTML = `<i class="bi bi-cloud-arrow-down-fill"></i>Descargar listado Actualzado`;
+
+// Agregar el enlace al DOM (por ejemplo, a un div con id "descargas")
+document.getElementById("descargas").appendChild(enlaceDescarga);
 
 
 //! Seleccionamos los elementos del DOM y se crean variables o constantes
@@ -40,13 +50,10 @@ fetch("../data/productos.json")
                 if(e.currentTarget.id != "todos"){
                     const findProductos = productos.find(producto => producto.categoria.id === e.currentTarget.id);
                     tituloPrincipal.innerText = boton.ariaValueText;
-                    tituloFiltros.innerText = boton.ariaValueText;
-        
                     const filtroProductos = productos.filter(producto => producto.categoria.id === e.currentTarget.id);
                     cargarProductos(filtroProductos);
                     
                 } else {
-                    tituloFiltros.innerText = "Todos los Productos";
                     tituloPrincipal.innerText = "Todos los Productos";
                     cargarProductos(productos);
                 }

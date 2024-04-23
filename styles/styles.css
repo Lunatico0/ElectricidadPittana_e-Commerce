@@ -58,6 +58,14 @@ li {
   list-style: none;
 }
 
+.tituloFiltros {
+  color: #67d2da;
+  font-size: 16px;
+  text-shadow: rgb(255, 208, 0) 1px 0 5px;
+  font-family: "ethnocentric", sans-serif;
+  transition: all 300ms;
+}
+
 @keyframes fadeLeft {
   from {
     margin-left: 100%;
@@ -98,7 +106,8 @@ li {
 .sweet {
   background-color: #212121;
 }
-.sweet .tituloG {
+.sweet .tituloG,
+.sweet .tituloFiltros {
   color: #67d2da;
   font-size: 16px;
   text-shadow: rgb(255, 208, 0) 1px 0 5px;
